@@ -1,0 +1,180 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.header{
+    width: 1078px;
+    height: 48px;
+    align-items: center;
+    display: flex;
+    margin-top: 28px;
+    margin-bottom: 31px;
+
+}
+
+#active-element{
+    color: #5e5e5e;
+}
+
+.menu{
+    width: 1078px;
+    height: 48px;
+    align-items: center;
+    margin-left: 181px;
+    display: flex;
+   
+}
+
+.search{
+    width: 343px;
+    height: 47px;
+    border-radius: 20px;
+    border: 1px solid black; 
+    display: flex;
+    align-items: center;
+    
+}
+
+.search-input{
+    font-size: 20px;
+    margin: 0;
+    border: none;
+    outline: none;
+}
+
+.search-icon{
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.headertext {
+    text-decoration: none;
+    color: black;
+    margin-left: 35px;
+    margin-right: 35px;
+    font-size: 20px;
+}
+
+.headertext:hover {
+    color: #757474;
+}
+
+.profile-icon{
+    font-size: 26px;
+    margin-left: 150px;
+}
+
+.about{
+    background-color: #F1EFE3;
+    width: 1078px;
+    height: 132px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    margin-left: 181px;
+    padding: 20px 40px;
+
+    
+}
+.personIcon{
+  width:  97px;
+}
+.personName{
+    font-size: 32px;
+    margin-left: 30px;
+}
+
+.book_about{
+    width: 170px;
+}
+
+.info {
+    border: 1px solid black; 
+  width: 1078px;
+      height: 211px;
+      border-radius: 30px;
+      margin-left: 181px;
+      margin-top: 32px;
+      margin-bottom: 32px;
+      padding: 20px 40px;
+      flex-direction: column;
+      
+  }
+  
+  .info-title {
+      font-size: 32px; 
+      margin-bottom: 15px;
+  }
+    
+  .info-line {
+      border-bottom: 1px solid black;
+      margin-bottom: 14px;
+  }
+    
+  .info-item {
+      margin-bottom:11px;
+      font-size: 20px; 
+  }
+  
+
+.myBook{
+    background-color: #FFFFFF;
+    width: 1078px;
+    height: 392px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 5px;
+    flex-direction: colun;
+    margin-left: 181px;
+    padding: 20px 40px;
+    justify-content: space-between; 
+    border: 1px solid black; 
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; 
+    flex-wrap: wrap;   
+}
+
+.myBook-text{
+    font-size: 32px;
+    margin-left: 220px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.addBook{
+  color: #757474;
+  background-color: #FFFFFF;
+  border: none;
+  font-size: 20px;
+}
+
+.book {
+    text-align: center;
+    margin-bottom: 20px; 
+    width: 22%;      
+    min-width: 200px;  
+}
+
+.name {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #757474;
+    line-height: 1.2;
+}
+
+.rating {
+    font-size: 70рх;
+    color: #757474;
+    margin-top: 20px;
+}
+
+
+@font-face {
+    font-family: mainfont;
+    src: url(./JejuMyeongjo-Regular.ttf);
+}
