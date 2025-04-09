@@ -4,6 +4,12 @@
     align-items: center;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .header{
     width: 1078px;
     height: 48px;

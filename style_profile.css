@@ -4,6 +4,11 @@
     align-items: center;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .header{
     width: 1078px;
@@ -23,7 +28,6 @@
     width: 1078px;
     height: 48px;
     align-items: center;
-    margin-left: 181px;
     display: flex;
    
 }
@@ -74,7 +78,6 @@
     display: flex;
     align-items: center;
     border-radius: 30px;
-    margin-left: 181px;
     padding: 20px 40px;
 
     
@@ -93,7 +96,7 @@
 
 .info {
     border: 1px solid black; 
-  width: 1078px;
+    width: 1078px;
       height: 211px;
       border-radius: 30px;
       margin-left: 181px;
