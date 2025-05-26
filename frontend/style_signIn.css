@@ -1,0 +1,110 @@
+body {
+    background-color: rgb(241, 239, 227);
+    font-family: mainfont;
+}
+
+input {
+    width: 321.3px;
+    height: 42.21px;
+    border-radius: 25.2px;
+    border: 0.945px solid #68554B;
+    background: #FFF;
+}
+
+::placeholder{
+    color: #68554B;
+    font-size: 20px;
+    font-family: mainfont;
+    padding-left: 15px;
+}
+
+.emailinput {
+    margin-top: 30px;
+}
+
+
+.passinput {
+    margin-top: 13px;
+}
+
+.logo{
+    margin-top: 20px;
+}
+
+.reg-container {
+    background-color: #FFFFFF;
+    width: 416px;
+    height: 516px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 37px;
+    margin-top: 30px;
+    margin-left: 512px;
+}
+
+.reg-text {
+    margin-top: 10px;
+    color: #382A24;
+    font-size: 25px;
+}
+
+.headertext {
+    color: #382A24;
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.login {
+    text-decoration: none;
+    margin-top: 47px;
+    width: 321.3px;
+    height: 42.21px;
+    border-radius: 25.2px;
+    border: 0.945px solid #FFF;
+    background: #68554B;
+    font-family: maintext;
+    color: #FFF;
+    font-size: 20px;
+    justify-content: center;
+    display: flex; 
+    align-items: center; 
+}
+
+.login:hover{
+    background: #382A24;
+
+}
+
+.reg-recovery{
+    font-size: 20px;
+    text-decoration: none;
+    color: #68554B;
+    margin-top: 73px;
+
+}
+.reg-recovery:hover{
+    color: #000000;
+
+}
+
+.toreg{
+    font-size: 20px;
+    text-decoration: none;
+    color: #68554B;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+
+.toreg:hover{
+    color: #000000;
+
+}
+
+@font-face {
+    font-family: mainfont;
+    src: url(./JejuMyeongjo-Regular.ttf);
+}
+

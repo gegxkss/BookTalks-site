@@ -1,0 +1,465 @@
+body {
+    display: flex;
+    background-color: #FFFFFF;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: auto;
+    height: 48px;
+    align-items: center;
+    display: flex;
+    margin-top: 28px;
+    margin-bottom: 31px;
+
+}
+
+#active-element {
+    color: #5e5e5e;
+}
+
+
+.search {
+    width: 343px;
+    height: 47px;
+    border-radius: 20px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+
+}
+
+.search-input {
+    font-size: 20px;
+    margin: 0;
+    border: none;
+    outline: none;
+}
+
+.search-icon {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.headertext {
+    white-space: nowrap;
+    text-decoration: none;
+    color: black;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-size: 20px;
+}
+
+.headertext:hover {
+    color: #757474;
+}
+
+.svgprofile {
+    margin-left: 100px;
+}
+
+.resenz {
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.book {
+    display: flex;
+    background: #F1EFE3;
+    width: 1082px;
+    height: 190.352px;
+    border-radius: 30px;
+    padding: 20px 40px;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.name {
+    margin-left: 53px;
+    flex-direction: column;
+    line-height: 30px;
+    display: flex;
+
+}
+
+.slider-container {
+    width: 100%;
+    /* Adjust as needed */
+    max-width: 1190px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slide {
+    font-size: 20px;
+    border: 1px solid black;
+    width: 1080px;
+    height: auto;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 40px;
+    flex-direction: column;
+    position: relative;
+    /* For absolute positioning of the arrow */
+    background-color: white;
+    /* Add a background color */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+    /* Button color */
+    padding: 7 10px;
+    /* Add some padding */
+    z-index: 10;
+}
+
+.slider-button:focus {
+    outline: none;
+    /* Remove default focus outline */
+}
+
+.prev {
+    left: 5px;
+}
+
+.next {
+    right: 5px;
+}
+
+.rating {
+    margin-left: auto;
+    font-size: 20px;
+    color: #757474;
+}
+
+
+.nameBook {
+    font-size: 32px;
+    margin-bottom: 0;
+    margin-top: 0;
+
+
+}
+
+.author {
+    font-size: 20px;
+    margin-top: 0;
+    text-align: left;
+
+}
+
+.knizka {
+    width: 89px;
+    height: 146px;
+
+}
+
+.res {
+    border: 1px solid black;
+    width: 1078px;
+    height: auto;
+    border-radius: 30px;
+    margin-top: 15px;
+    margin-bottom: 32px;
+    padding: 20px 40px;
+    flex-direction: column;
+
+}
+
+.title {
+    font-size: 32px;
+    width: 1078px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.res-disc {
+    height: auto;
+    font-size: 20px;
+}
+
+.personName {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.myScore {
+    font-size: 20px;
+    margin-left: 22px;
+}
+
+
+footer {
+    background-color: #382A24;
+    color: white;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    margin-left: 261px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.adress {
+    margin-right: 8px;
+}
+
+.emailadrs {
+    margin-right: 8px;
+}
+
+.email {
+    margin-right: 8px;
+    text-decoration: none;
+    color: #FFFFFF;
+
+}
+
+.phone {
+    margin-right: 8px;
+}
+
+.account {
+    margin-right: 300px;
+    text-decoration: none;
+
+}
+
+.acc {
+    font-size: 32px;
+
+    margin: 0;
+}
+
+.acc-text {
+    color: #FFFFFF;
+    text-decoration: none;
+    line-height: 30px;
+    display: flex;
+}
+
+.line {
+    color: #C8C8C8;
+    width: 661px;
+}
+
+.right {
+    color: #C8C8C8;
+    text-align: center;
+    font-size: 20px;
+}
+
+.res textarea {
+    text-decoration: none;
+    width: 1060px;
+    height: auto;
+    /* Textarea на всю ширину */
+    padding: 10px;
+    /* Внутренние отступы */
+    border: none;
+    /* Граница */
+    border-radius: 5px;
+    /* Скругленные углы */
+    font-size: 16px;
+    /* Размер шрифта */
+    resize: vertical;
+    /* Разрешаем менять высоту */
+    min-height: 100px;
+    /* Минимальная высота */
+}
+
+.submit {
+    background-color: #D4D4D4;
+    /* Зеленый фон */
+    width: 510px;
+    color: white;
+    /* Белый текст */
+    padding: 12px 20px;
+    /* Внутренние отступы */
+    border: none;
+    /* Убираем границу */
+    border-radius: 30px;
+    /* Скругленные углы */
+    cursor: pointer;
+    /* Курсор в виде руки */
+    font-size: 24px;
+    margin-bottom: 20px;
+    /* Размер шрифта */
+}
+
+.open-popup-button {
+    background-color: #68554B;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 5px;
+    width: 327px;
+    height: 67px;
+    /* Плавное изменение цвета фона */
+}
+
+.open-popup-button:hover {
+    background-color: #382A24;
+    /* Более светлый коричневый при наведении */
+}
+
+/* Стили для попап меню */
+.popup-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    /* Бежевый цвет фона */
+    border: 1px solid #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    border-radius: 10px;
+    /* Закругленные углы */
+}
+
+.button-conteiner {
+    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
+    width: 1130px;
+    display: flex;
+    margin-bottom: 20px;
+
+}
+
+.popup-menu.show {
+    display: block;
+}
+
+.p{
+    color: #000000;
+    /* Темно-коричневый цвет заголовков */
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.popup-menu textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    /* Чтобы padding не увеличивал ширину */
+}
+
+/* Стили для кнопок внутри попап меню */
+.popup-menu button.close-popup-button {
+    background-color: #68554B;
+    /* Коричневый цвет кнопок */
+    color: #ffffff;
+    /* Бежевый цвет текста */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    /* Закругленные углы */
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.popup-menu button.close-popup-button:hover {
+    background-color: #382A24;
+}
+
+/* Стили для оверлея */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.overlay.show {
+    display: block;
+}
+
+/* Стили для звездного рейтинга */
+.star-rating {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.star {
+    cursor: pointer;
+    color: #ccc; /* Цвет ненаполненной звезды */
+    transition: color 0.2s ease;
+    display: inline-block; /* Чтобы можно было задавать размеры */
+}
+
+/* Чтобы звездочки были одинакового размера */
+.star svg {
+    width: 1em;
+    height: 1em;
+    fill: #ccc; /* Цвет заливки ненаполненной звезды */
+}
+
+.star:hover svg,
+.star.active svg {
+    fill: #382A24; /* Цвет заливки заполненной звезды */
+}
+
+
+.star:hover,
+.star.active {
+  color: #382A24; /* Желтый цвет при наведении или выборе */
+}
