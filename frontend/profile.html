@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booktalks</title>
-    <link rel="stylesheet" href="/frontend/style_profile.css">
+    <link rel="stylesheet" href="style_profile.css">
 </head>
 
 <body>
@@ -171,6 +171,15 @@
         </div>
     </footer>
     <script src="reg.js"></script>
+    <script>
+fetch('/BookTalks-site/backend/check_auth.php')
+  .then(res => res.json())
+  .then(data => {
+    if (!data.authenticated) {
+      window.location.href = '/BookTalks-site/signIn.html';
+    }
+  });
+</script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booktalks</title>
-    <link rel="stylesheet" href="/frontend/style_main.css">
+    <link rel="stylesheet" href="./style_main.css">
 </head>
     
 <body>
@@ -31,11 +31,11 @@
 
         <div class="headertext">
         <a href="" class="headertext">Главная</a>
-        <a href="/frontend/resenzii.html" class="headertext">Рецензии</a>
-        <a href="/frontend/quote.html" class="headertext">Цитаты</a>
-        <a href="/frontend/recommend.html" class="headertext">Что почитать</a>
+        <a href="./resenzii.html" class="headertext">Рецензии</a>
+        <a href="./quote.html" class="headertext">Цитаты</a>
+        <a href="./recommend.html" class="headertext">Что почитать</a>
         </div>
-        <a href="/frontend/profile.html" class="profileIcon">
+        <a href="/BookTalks-site/signIn.html" class="profileIcon">
             <svg class="svgprofile" width="28" height="28" viewBox="0 0 28 28" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -73,22 +73,22 @@
         <div class="bestsellers">
             <div class="book">
                 <p class="name">Норвежский лес <br>Харуки Мураками</p>
-                <img src="/frontend/styles/images/book_norvegianwood.png" alt="Books" class="book_about">
+                <img src="styles/images/book_norvegianwood.png" alt="Books" class="book_about">
                 <div class="rating">★ 4</div>
             </div>
             <div class="book">
                 <p class="name">Фауст<br>Иоганн Гёте</p>
-                <img src="/frontend/styles/images/book_faust.png" alt="Books" class="book_about">
+                <img src="styles/images/book_faust.png" alt="Books" class="book_about">
                 <div class="rating">★ 4,6</div>
             </div>
             <div class="book">
                 <p class="name">Унесенные ветром <br>Маргарет Митчелл</p>
-                <img src="/frontend/styles/images/book_gonewiththewind.png" alt="Books" class="book_about">
+                <img src="styles/images/book_gonewiththewind.png" alt="Books" class="book_about">
                 <div class="rating">★ 4,8</div>
             </div>
             <div class="book">
                 <p class="name">Великий Гэтсби <br>Фрэнсис Фицджеральд</p>
-                <img src="/frontend/styles/images/book_greatgatsb.webp" alt="Books" class="book_about">
+                <img src="styles/images/book_greatgatsb.webp" alt="Books" class="book_about">
                 <div class="rating">★ 4,1</div>
             </div>
         </div>
@@ -96,22 +96,22 @@
         <div class="new">
             <div class="book">
                 <p class="name">Норвежский лес <br>Харуки Мураками</p>
-                <img src="/frontend/styles/images/book_norvegianwood.png" alt="Books" class="book_about">
+                <img src="styles/images/book_norvegianwood.png" alt="Books" class="book_about">
                 <div class="rating">★ 4</div>
             </div>
             <div class="book">
                 <p class="name">Фауст<br>Иоганн Гёте</p>
-                <img src="/frontend/styles/images/book_faust.png" alt="Books" class="book_about">
+                <img src="styles/images/book_faust.png" alt="Books" class="book_about">
                 <div class="rating">★ 4,6</div>
             </div>
             <div class="book">
                 <p class="name">Унесенные ветром <br>Маргарет Митчелл</p>
-                <img src="/frontend/styles/images/book_gonewiththewind.png" alt="Books" class="book_about">
+                <img src="styles/images/book_gonewiththewind.png" alt="Books" class="book_about">
                 <div class="rating">★ 4,8</div>
             </div>
             <div class="book">
                 <p class="name">Великий Гэтсби <br>Фрэнсис Фицджеральд</p>
-                <img src="/frontend/styles/images/book_greatgatsb.webp" alt="Books" class="book_about">
+                <img src="styles/images/book_greatgatsb.webp" alt="Books" class="book_about">
                 <div class="rating">★ 4,1</div>
             </div>
         </div>
@@ -213,8 +213,16 @@
     dropdown.style.display = 'none';
   }
 }
+
+fetch('/BookTalks-site/backend/check_auth.php')
+  .then(res => res.json())
+  .then(data => {
+    if (!data.authenticated) {
+      // Скрыть/заблокировать кнопки добавления книг, цитат, рецензий
+      document.querySelectorAll('.add-btn').forEach(btn => btn.style.display = 'none');
+    }
+  });
 </script>
+    <script src="js/main.js"></script>
 </body>
-
-
 </html>

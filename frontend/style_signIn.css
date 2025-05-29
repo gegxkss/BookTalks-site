@@ -1,46 +1,57 @@
 body {
-    background-color: rgb(241, 239, 227);
-    font-family: mainfont;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(120deg, #f5e9d7 0%, #e3d0c0 100%);
+    font-family: mainfont, serif;
 }
 
 input {
-    width: 321.3px;
+    width: 90%;
+    max-width: 321.3px;
     height: 42.21px;
     border-radius: 25.2px;
-    border: 0.945px solid #68554B;
+    border: 1px solid #68554B;
     background: #FFF;
+    margin-bottom: 16px;
+    font-size: 18px;
+    padding-left: 18px;
+    transition: box-shadow 0.2s, border 0.2s;
+    box-shadow: 0 1.5px 6px 0 rgba(104, 85, 75, 0.07);
+}
+input:focus {
+    outline: none;
+    border: 1.5px solid #382A24;
+    box-shadow: 0 2px 12px 0 rgba(56, 42, 36, 0.13);
 }
 
 ::placeholder{
     color: #68554B;
-    font-size: 20px;
+    font-size: 18px;
     font-family: mainfont;
-    padding-left: 15px;
-}
-
-.emailinput {
-    margin-top: 30px;
-}
-
-
-.passinput {
-    margin-top: 13px;
+    opacity: 0.8;
 }
 
 .logo{
-    margin-top: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .reg-container {
-    background-color: #FFFFFF;
+    background-color: #fff;
     width: 416px;
-    height: 516px;
+    max-width: 95vw;
+    height: auto;
+    min-height: 516px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 37px;
-    margin-top: 30px;
-    margin-left: 512px;
+    box-shadow: 0 8px 32px 0 rgba(56, 42, 36, 0.18), 0 1.5px 8px 0 rgba(104, 85, 75, 0.10);
+    padding: 32px 32px 24px 32px;
+    margin: 0;
 }
 
 .reg-text {
@@ -52,55 +63,71 @@ input {
 .headertext {
     color: #382A24;
     font-size: 32px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 
 .login {
     text-decoration: none;
-    margin-top: 47px;
-    width: 321.3px;
-    height: 42.21px;
+    margin-top: 18px;
+    width: 90%;
+    max-width: 321.3px;
+    height: 44px;
     border-radius: 25.2px;
-    border: 0.945px solid #FFF;
-    background: #68554B;
-    font-family: maintext;
+    border: none;
+    background: linear-gradient(90deg, #68554B 0%, #382A24 100%);
+    font-family: mainfont, serif;
     color: #FFF;
     font-size: 20px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    display: flex; 
-    align-items: center; 
+    box-shadow: 0 2px 8px 0 rgba(104, 85, 75, 0.13);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
 }
-
 .login:hover{
-    background: #382A24;
-
+    background: linear-gradient(90deg, #382A24 0%, #68554B 100%);
+    box-shadow: 0 4px 16px 0 rgba(56, 42, 36, 0.18);
+    transform: translateY(-2px) scale(1.03);
 }
 
-.reg-recovery{
-    font-size: 20px;
+.reg-recovery, .toreg{
+    font-size: 17px;
     text-decoration: none;
     color: #68554B;
-    margin-top: 73px;
-
+    margin-top: 18px;
+    margin-bottom: 0;
+    transition: color 0.2s;
+    display: block;
+    text-align: center;
 }
-.reg-recovery:hover{
-    color: #000000;
-
-}
-
-.toreg{
-    font-size: 20px;
-    text-decoration: none;
-    color: #68554B;
-    margin-top: 7px;
-    margin-bottom: 20px;
+.reg-recovery:hover, .toreg:hover{
+    color: #382A24;
 }
 
-.toreg:hover{
-    color: #000000;
-
+@media (max-width: 600px) {
+    .reg-container {
+        width: 98vw;
+        min-height: unset;
+        padding: 18px 4vw 18px 4vw;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px 0 rgba(56, 42, 36, 0.10);
+    }
+    .logo {
+        width: 60px;
+        height: 54px;
+    }
+    .headertext {
+        font-size: 24px;
+    }
+    input, .login {
+        font-size: 16px;
+        height: 38px;
+    }
 }
 
 @font-face {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booktalks</title>
-    <link rel="stylesheet" href="/frontend/style_quote.css">
+    <link rel="stylesheet" href="style_quote.css">
 </head>
 
 <body>
@@ -159,6 +159,17 @@
             © BookTalks 2024. All rights reserved
         </div>
     </footer>
+    <script>
+        fetch('/BookTalks-site/backend/check_auth.php')
+            .then(res => res.json())
+            .then(data => {
+                if (!data.authenticated) {
+                    // Скрыть/заблокировать форму добавления цитаты
+                    document.getElementById('add-quote-form').style.display = 'none';
+                    document.getElementById('not-auth').style.display = 'block';
+                }
+            });
+    </script>
 </body>
 
 </html>

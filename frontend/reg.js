@@ -131,8 +131,7 @@ birthDateInput.addEventListener('blur', () => {
 });
 
     // Отправляем данные на сервер (AJAX)
-    // Отправляем данные на сервер (AJAX)
-    fetch('http://localhost:8000/register', {
+    fetch('/BookTalks-site/backend/register.php', {
             method: 'POST',
             body: formData // Отправляем FormData
         })

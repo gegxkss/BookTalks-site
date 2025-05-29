@@ -1,0 +1,408 @@
+table book{
+  id serial [primary key]
+  name varchar
+  genre_id int
+  author_id int
+  coverimage_filename varchar
+  created_at timestamp 
+}
+
+table author{
+  id serial [primary key]
+  first_name varchar
+  last_name varchar
+  surname varchar
+}
+
+table rating {
+  id serial [primary key]
+  book_id int
+  user_id int
+  amount int
+}
+
+table user_book {
+  id serial [primary key]
+  user_id int
+  book_id int
+}
+
+table rewiew {
+  id serial [primary key]
+  user_id int
+  book_id int
+  text text
+  created_at timestamp
+}
+
+table genre{
+  id serial [primary key]
+  name varchar
+}
+
+table quote{
+  id serial [primary key]
+  book_id int
+  user_id int
+  text text
+}
+
+table user{
+  id serial [primary key]
+  nickname varchar
+  first_name varchar
+  last_name varchar
+  sex varchar
+  birth_date datetime
+  email varchar
+  password varchar
+  created_at timestamp
+}
+ref: "book"."id" < "rating"."book_id"
+
+Ref: "book"."id" < "rewiew"."book_id"
+
+Ref: "book"."id" < "quote"."book_id"
+
+Ref: "user"."id" < "rewiew"."user_id"
+
+Ref: "user"."id" < "quote"."user_id"
+
+Ref: "user"."id" < "rating"."user_id"
+
+Ref: "author"."id" < "book"."author_id"
+
+Ref: "book"."id" < "user_book"."book_id"
+
+Ref: "user"."id" < "user_book"."user_id"
+
+Ref: "genre"."id" < "book"."genre_id"
+
+Table "admins" {
+
+  "id" serial [not null, increment]
+
+  "name" "character varying"
+
+  "password" "character varying"
+
+
+
+  Indexes {
+
+    id [pk, name: "admins_pkey"]
+
+  }
+
+}
+
+
+
+Table "carts" {
+
+  "id" serial [not null, increment]
+
+  "product_id" integer
+
+  "user_id" integer
+
+  "count" integer
+
+  "added_at" timestamp [default: `CURRENT_TIMESTAMP`]
+
+
+
+  Indexes {
+
+    id [pk, name: "carts_pkey"]
+
+    (product_id, user_id) [unique, name: "unique_product_client"]
+
+  }
+
+}
+
+
+
+Table "categories" {
+
+  "id" serial [not null, increment]
+
+  "name" "character varying"
+
+
+
+  Indexes {
+
+    id [pk, name: "categories_pkey"]
+
+    name [unique, name: "categories_name_key"]
+
+  }
+
+}
+
+
+
+Table "deliveries" {
+
+  "id" serial [not null, increment]
+
+  "product_id" integer
+
+  "count" integer
+
+  "date" timestamp [default: `CURRENT_TIMESTAMP`]
+
+
+
+  Indexes {
+
+    id [pk, name: "deliveries_pkey"]
+
+  }
+
+}
+
+
+
+Table "manufacturers" {
+
+  "id" serial [not null, increment]
+
+  "name" "character varying"
+
+  "image_filename" "character varying"
+
+
+
+  Indexes {
+
+    id [pk, name: "manufacturers_pkey"]
+
+    name [unique, name: "manufacturers_name_key"]
+
+  }
+
+}
+
+
+
+Table "order_statuses" {
+
+  "id" serial [not null, increment]
+
+  "order_id" integer
+
+  "status" integer [default: 1]
+
+  "date" timestamp [default: `CURRENT_TIMESTAMP`]
+
+
+
+  Indexes {
+
+    id [pk, name: "order_statuses_pkey"]
+
+  }
+
+}
+
+
+
+Table "orders" {
+
+  "id" serial [not null, increment]
+
+  "user_id" integer
+
+  "date" timestamp [default: `CURRENT_TIMESTAMP`]
+
+  "address" "character varying"
+
+
+
+  Indexes {
+
+    id [pk, name: "orders_pkey"]
+
+  }
+
+}
+
+
+
+Table "price_changes" {
+
+  "id" serial [not null, increment]
+
+  "date" timestamp [default: `CURRENT_TIMESTAMP`]
+
+  "product_id" integer
+
+  "price" integer
+
+
+
+  Indexes {
+
+    id [pk, name: "price_changes_pkey"]
+
+  }
+
+}
+
+
+
+Table "products" {
+
+  "id" serial [not null, increment]
+
+  "name" "character varying"
+
+  "description" text
+
+  "manufacturer_id" integer
+
+  "category_id" integer
+
+  "image_filename" "character varying"
+
+
+
+  Indexes {
+
+    id [pk, name: "products_pkey"]
+
+  }
+
+}
+
+
+
+Table "promotional_items" {
+
+  "id" serial [not null, increment]
+
+  "product_id" integer
+
+
+
+  Indexes {
+
+    id [pk, name: "promotional_items_pkey"]
+
+  }
+
+}
+
+
+
+Table "sales" {
+
+  "id" serial [not null, increment]
+
+  "order_id" integer
+
+  "product_id" integer
+
+  "count" integer
+
+
+
+  Indexes {
+
+    id [pk, name: "sales_pkey"]
+
+  }
+
+}
+
+
+
+Table "users" {
+
+  "id" serial [not null, increment]
+
+  "username" "character varying"
+
+  "phone_number" "character varying"
+
+  "password" "character varying"
+
+  "registration_date" timestamp [default: `CURRENT_TIMESTAMP`]
+
+
+
+  Indexes {
+
+    id [pk, name: "users_pkey"]
+
+    username [unique, name: "users_username_key"]
+
+  }
+
+}
+
+
+
+Table "warehouse" {
+
+  "product_id" serial [not null, increment]
+
+  "count" integer
+
+
+
+  Indexes {
+
+    product_id [pk, name: "warehouse_pkey"]
+
+  }
+
+}
+
+
+
+Ref "carts_product_id_fkey":"products"."id" < "carts"."product_id" [update: no action, delete: no action]
+
+
+
+Ref "carts_user_id_fkey":"users"."id" < "carts"."user_id" [update: no action, delete: no action]
+
+
+
+Ref "deliveries_product_id_fkey":"products"."id" < "deliveries"."product_id" [update: no action, delete: no action]
+
+
+
+Ref "order_statuses_order_id_fkey":"orders"."id" < "order_statuses"."order_id" [update: no action, delete: no action]
+
+
+
+Ref "orders_user_id_fkey":"users"."id" < "orders"."user_id" [update: no action, delete: no action]
+
+
+
+Ref "price_changes_product_id_fkey":"products"."id" < "price_changes"."product_id" [update: no action, delete: no action]
+
+
+
+Ref "products_category_id_fkey":"categories"."id" < "products"."category_id" [update: no action, delete: no action]
+
+
+
+Ref "products_manufacturer_id_fkey":"manufacturers"."id" < "products"."manufacturer_id" [update: no action, delete: no action]
+
+
+
+Ref "promotional_items_product_id_fkey":"products"."id" < "promotional_items"."product_id" [update: no action, delete: no action]
+
+
+
+Ref "sales_order_id_fkey":"orders"."id" < "sales"."order_id" [update: no action, delete: no action]
+
+
+
+Ref "sales_product_id_fkey":"products"."id" < "sales"."product_id" [update: no action, delete: no action]
+

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booktalks</title>
-    <link rel="stylesheet" href="/frontend/library.css">
+    <link rel="stylesheet" href="library.css">
 </head>
 
 <body>
@@ -85,6 +85,7 @@
             <div class="rating">★ 3</div>
         </div>
     </div>
+    <div id="books-list"></div>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -122,6 +123,22 @@
                 console.error('Book ID not found in URL');
             }
         });
+
+        fetch('/BookTalks-site/backend/books_list.php')
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById('books-list');
+    if (list && data.books) {
+      list.innerHTML = '';
+      data.books.forEach(book => {
+        const item = document.createElement('div');
+        item.className = 'book-item';
+        item.innerHTML = `<b>${book.name}</b> — ${book.first_name || ''} ${book.last_name || ''} (${book.genre || ''})`;
+        item.onclick = () => window.location.href = `/BookTalks-site/book_info.html?id=${book.id}`;
+        list.appendChild(item);
+      });
+    }
+  });
 </script>
 <footer>
     <div class="footer-content">
