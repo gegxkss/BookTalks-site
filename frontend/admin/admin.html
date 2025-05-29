@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BookTalks</title>
+    <link rel="stylesheet" href="../style_main.css">  <!-- Используем общие стили -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Здесь может быть логотип и навигация, как на основном сайте -->
+        Admin Panel - BookTalks
+    </header>
+
+    <main class="admin-main">
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="add_book.html">Добавить книгу</a></li>
+                <li><a href="#">Управление пользователями</a></li>
+                <li><a href="#">Управление рецензиями</a></li>
+            </ul>
+        </nav>
+
+        <section class="admin-content">
+            <h2>Добро пожаловать в панель администратора!</h2>
+            <p>Выберите раздел в навигации слева.</p>
+
+            <!-- Раздел для отображения списка книг -->
+            <h2>Список книг</h2>
+            <div id="bookListContainer">
+                <table id="bookListTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Название</th>
+                            <th>Автор ID</th>
+                            <th>Жанр ID</th>
+                            <th>Обложка</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookListBody">
+                        <!-- Здесь будут отображаться книги -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Здесь может быть футер -->
+    </footer>
+    <script>
+        // JavaScript для отображения списка книг
+        async function getBooks() {
+            try {
+                const response = await fetch('/api/books');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const books = await response.json();
+                displayBooks(books);
+            } catch (error) {
+                console.error('Error fetching books:', error);
+                document.getElementById('bookListBody').innerHTML = '<tr><td colspan="6">Ошибка при загрузке книг.</td></tr>';
+            }
+        }
+
+        function displayBooks(books) {
+            const bookListBody = document.getElementById('bookListBody');
+            bookListBody.innerHTML = ''; // Очищаем предыдущий список
+
+            books.forEach(book => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${book.ID}</td>
+                    <td>${book.Name}</td>
+                    <td>${book.AuthorID}</td>
+                    <td>${book.GenreID}</td>
+                    <td><img src="" alt="Обложка" style="width: 50px;"></td>
+                    <td><button onclick="editBook(${book.ID})">Редактировать</button> | <button onclick="deleteBook(${book.ID})">Удалить</button></td>
+                `;
+                bookListBody.appendChild(row);
+            });
+        }
+
+        // Функции для редактирования и удаления (заглушки)
+        function editBook(id) {
+            alert(`Редактировать книгу с ID: ${id}`);
+        }
+
+        function deleteBook(id) {
+            alert(`Удалить книгу с ID: ${id}`);
+        }
+
+        // Загружаем список книг при загрузке страницы
+        getBooks();
+    </script>
+</body>
+</html>

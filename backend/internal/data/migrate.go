@@ -1,27 +1,25 @@
 package data
 
 import (
-	"context"
 	"log"
 )
 
+// MigrateDB выполняет миграции базы данных (создает таблицы, если их нет)
 func MigrateDB() error {
-	ctx := context.Background()
-
 	// Genre Table
-	_, err := DB.Exec(ctx, `
-        CREATE TABLE IF NOT EXISTS genre (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL
-        );
-    `)
+	_, err := DB.Exec(`
+		CREATE TABLE IF NOT EXISTS genre (
+			id SERIAL PRIMARY KEY,
+			name VARCHAR(255) NOT NULL
+		);
+	`)
 	if err != nil {
 		log.Printf("Error creating genre table: %s", err)
 		return err
 	}
 
 	// Author Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS author (
 			id SERIAL PRIMARY KEY,
 			first_name VARCHAR(255) NOT NULL,
@@ -35,10 +33,10 @@ func MigrateDB() error {
 	}
 
 	// User Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS users (
 			id SERIAL PRIMARY KEY,
-			nickname VARCHAR(255) NOT NULL,
+			nickname VARCHAR(255) NOT NULL UNIQUE,
 			first_name VARCHAR(255) NOT NULL,
 			last_name VARCHAR(255) NOT NULL,
 			sex VARCHAR(10),
@@ -54,7 +52,7 @@ func MigrateDB() error {
 	}
 
 	// Book Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS book (
 			id SERIAL PRIMARY KEY,
 			name VARCHAR(255) NOT NULL,
@@ -70,7 +68,7 @@ func MigrateDB() error {
 	}
 
 	// Rating Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS rating (
 			id SERIAL PRIMARY KEY,
 			book_id INTEGER REFERENCES book(id),
@@ -84,7 +82,7 @@ func MigrateDB() error {
 	}
 
 	// Quote Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS quote (
 			id SERIAL PRIMARY KEY,
 			book_id INTEGER REFERENCES book(id),
@@ -98,7 +96,7 @@ func MigrateDB() error {
 	}
 
 	// Review Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS review (
 			id SERIAL PRIMARY KEY,
 			user_id INTEGER REFERENCES users(id),
@@ -113,7 +111,7 @@ func MigrateDB() error {
 	}
 
 	// UserBook Table
-	_, err = DB.Exec(ctx, `
+	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS user_book (
 			id SERIAL PRIMARY KEY,
 			user_id INTEGER REFERENCES users(id),

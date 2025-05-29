@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booktalks</title>
-    <link rel="stylesheet" href="addBook.css">
+    <link rel="stylesheet" href="/frontend/addBook.css">
 </head>
 
 <body>
@@ -50,7 +50,7 @@
             </div>
             <div class="rating">★ 4,1</div>
         </div>
-        <div class = "button-conteiner">
+        <div class="button-conteiner">
             <button class="open-popup-button" data-popup="add-review">Добавить цитату</button>
             <button class="open-popup-button" data-popup="add-quote">Добавить рецензию</button>
             <button class="open-popup-button" data-popup="rate-book">Поставить оценку</button>
@@ -118,38 +118,48 @@
 
         <!-- Попап меню для оценки книги -->
         <!-- Попап меню для оценки книги -->
-    <div class="popup-menu" id="rate-book-popup">
-    <h2>Оценить книгу</h2>
-    <div class="star-rating">
-        <span class="star" data-rating="1">
-            <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
-  <path d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z" fill="currentColor"/>
-</svg>
-        </span>
-        <span class="star" data-rating="2">
-            <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
-  <path d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z" fill="currentColor"/>
-</svg>
-        </span>
-        <span class="star" data-rating="3">
-            <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
-  <path d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z" fill="currentColor"/>
-</svg>
-        </span>
-        <span class="star" data-rating="4">
-            <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
-  <path d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z" fill="currentColor"/>
-</svg>
-        </span>
-        <span class="star" data-rating="5">
-            <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
-  <path d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z" fill="currentColor"/>
-</svg>
-        </span>
-    </div>
-    <button class="close-popup-button">Сохранить</button>
-    <button class="close-popup-button">Отмена</button>
-</div>
+        <div class="popup-menu" id="rate-book-popup">
+            <h2>Оценить книгу</h2>
+            <div class="star-rating">
+                <span class="star" data-rating="1">
+                    <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z"
+                            fill="currentColor" />
+                    </svg>
+                </span>
+                <span class="star" data-rating="2">
+                    <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z"
+                            fill="currentColor" />
+                    </svg>
+                </span>
+                <span class="star" data-rating="3">
+                    <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z"
+                            fill="currentColor" />
+                    </svg>
+                </span>
+                <span class="star" data-rating="4">
+                    <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z"
+                            fill="currentColor" />
+                    </svg>
+                </span>
+                <span class="star" data-rating="5">
+                    <svg width="77" height="73" viewBox="0 0 77 73" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M38.5 0L47.3683 27.6393H76.0667L52.8492 44.7214L61.7175 72.3607L38.5 55.2786L15.2825 72.3607L24.1508 44.7214L0.93327 27.6393H29.6317L38.5 0Z"
+                            fill="currentColor" />
+                    </svg>
+                </span>
+            </div>
+            <button class="close-popup-button">Сохранить</button>
+            <button class="close-popup-button">Отмена</button>
+        </div>
 
 
         <!-- Оверлей -->
@@ -251,27 +261,27 @@
             // Добавляем обработчик событий для оверлея, чтобы закрывать попап при клике вне попап меню
             overlay.addEventListener('click', closePopup);
             // Логика звездного рейтинга
-const starRating = document.querySelector('#rate-book-popup .star-rating');
-const stars = document.querySelectorAll('#rate-book-popup .star');
-let currentRating = 0;
+            const starRating = document.querySelector('#rate-book-popup .star-rating');
+            const stars = document.querySelectorAll('#rate-book-popup .star');
+            let currentRating = 0;
 
-stars.forEach(star => {
-    star.addEventListener('click', function () {
-        const rating = parseInt(this.dataset.rating);
-        currentRating = rating;
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    const rating = parseInt(this.dataset.rating);
+                    currentRating = rating;
 
-        // Заполняем звезды до выбранной
-        stars.forEach(s => {
-            if (parseInt(s.dataset.rating) <= rating) {
-                s.classList.add('active');
-            } else {
-                s.classList.remove('active');
-            }
-        });
+                    // Заполняем звезды до выбранной
+                    stars.forEach(s => {
+                        if (parseInt(s.dataset.rating) <= rating) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
 
-        console.log('Rating:', currentRating); // Выводим оценку в консоль
-    });
-});
+                    console.log('Rating:', currentRating); // Выводим оценку в консоль
+                });
+            });
 
             // Данные для слайдера цитат
             const quoteSlides = [
@@ -341,6 +351,63 @@ stars.forEach(star => {
             // Инициализация слайдеров
             initSlider('quote', quoteSlides);
             initSlider('review', reviewSlides);
+            // Функция для отправки рецензии
+            /*window.submitReview = function () {
+                const bookId = /* Вставьте сюда ID книги /;
+                const userId = /* Вставьте сюда ID пользователя /;
+                const reviewText = document.getElementById('reviewText').value;
+
+                fetch(`/books/${bookId}/reviews/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        text: reviewText
+                    })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Рецензия добавлена!');
+                            closePopup(); // Закрыть попап после успешной отправки
+                        } else {
+                            alert('Ошибка при добавлении рецензии.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка:', error);
+                        alert('Произошла ошибка при отправке запроса.');
+                    });
+            };
+         window.submitQuote = function () {
+                const bookId = /* Вставьте сюда ID книги ;
+                const userId = /* Вставьте сюда ID пользователя ;
+                const quoteText = document.getElementById('quoteText').value;
+
+                fetch(`/books/${bookId}/quotes/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        text: quoteText
+                    })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Цитата добавлена!');
+                            closePopup(); // Закрыть попап после успешной отправки
+                        } else {
+                            alert('Ошибка при добавлении цитаты.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка:', error);
+                        alert('Произошла ошибка при отправке запроса.');
+                    });
+            };*/
         });
     </script>
 </body>

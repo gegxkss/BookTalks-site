@@ -7,7 +7,6 @@ body {
     margin: 0;
 }
 
-
 .container {
     display: flex;
     flex-direction: column;
@@ -45,8 +44,7 @@ body {
     margin: 0;
     border: none;
     outline: none;
-    width: 100%; /* Занимает всю доступную ширину */
-    padding-right: 10px; /* Чтобы текст не прилегал к правому краю */
+    width: 260px; /* Занимает всю доступную ширину */
 }
 
 .search-icon {
@@ -94,7 +92,6 @@ body {
     color: #757474;
 }
 
-.profile-icon {}
 
 .svgprofile {
     margin-left: 100px;
@@ -110,6 +107,24 @@ body {
     padding: 20px 40px;
     justify-content: space-between;
 
+}
+
+.all-books{
+    background-color: #F1EFE3;
+    width: 1078px;
+    height: 132px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    padding: 20px 40px;
+    justify-content: space-between;
+    margin-top: 40px;
+
+}
+.container-link {
+    display: block; /* Важно: делаем ссылку блочным элементом, чтобы она занимала всю площадь контейнера */
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+    color: inherit; /* Наследуем цвет текста от родителя (контейнера) */
 }
 
 .logo-text {
@@ -191,11 +206,35 @@ body {
 
 .bestsellers-text {
     font-size: 32px;
-    margin-bottom: 15px;
-    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-top: 15px;
     align-items: start;
 }
 
+.new{
+    background-color: #FFFFFF;
+    width: 1078px;
+    height: 392px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 10px;
+    flex-direction: column;
+    padding: 20px 40px;
+    justify-content: space-between;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.new-text {
+    font-size: 32px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    align-items: start;
+}
 
 .book {
     text-align: center;

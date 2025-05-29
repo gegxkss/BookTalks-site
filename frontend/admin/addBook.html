@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить книгу - BookTalks</title>
+    <link rel="stylesheet" href="../style_main.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header class="header">
+        Admin Panel - BookTalks
+    </header>
+
+    <main class="admin-main">
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="add_book.html">Добавить книгу</a></li>
+                <li><a href="#">Управление пользователями</a></li>
+                <li><a href="#">Управление рецензиями</a></li>
+            </ul>
+        </nav>
+
+        <section class="admin-content">
+            <h2>Добавить новую книгу</h2>
+            <form id="addBookForm">
+                <label for="name">Название:</label><br>
+                <input type="text" id="name" name="name"><br><br>
+
+                <label for="author_id">ID Автора:</label><br>
+                <input type="number" id="author_id" name="author_id"><br><br>
+
+                <label for="genre_id">ID Жанра:</label><br>
+                <input type="number" id="genre_id" name="genre_id"><br><br>
+
+                <label for="coverimage_filename">Имя файла обложки:</label><br>
+                <input type="text" id="coverimage_filename" name="coverimage_filename"><br><br>
+
+                <label for="description">Описание:</label><br>
+                <textarea id="description" name="description"></textarea><br><br>
+
+                <button type="button" onclick="addBook()">Добавить</button>
+            </form>
+            <p id="addBookStatus"></p>
+        </section>
+    </main>
+
+    <footer>
+    </footer>
+    <script>
+        async function addBook() {
+            const name = document.getElementById('name').value;
+            const authorID = parseInt(document.getElementById('author_id').value, 10); // Parse to number
+            const genreID = parseInt(document.getElementById('genre_id').value, 10);   // Parse to number
+            const coverImageFilename = document.getElementById('coverimage_filename').value;
+            const description = document.getElementById('description').value;
+            const status = document.getElementById('addBookStatus');
+
+            const bookData = {
+                name: name,
+                author_id: authorID,
+                genre_id: genreID,
+                coverimage_filename: coverImageFilename,
+                description: description //  Включите описание
+            };
+
+            try {
+                const response = await fetch('/api/books', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json(); // Получаем ответ от сервера
+                status.textContent = `Книга "${data.name}" успешно добавлена!`; //  <-- Отображаем успешное добавление
+                document.getElementById('addBookForm').reset();
+
+            } catch (error) {
+                console.error('Error adding book:', error);
+                status.textContent = `Ошибка при добавлении книги: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

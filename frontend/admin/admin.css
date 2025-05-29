@@ -1,0 +1,62 @@
+/* Общие стили для панели администратора */
+.admin-main {
+    display: flex;
+    min-height: 80vh; /* чтобы контент занимал минимум 80% высоты экрана */
+}
+
+.admin-nav {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.admin-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-nav li {
+    margin-bottom: 10px;
+}
+
+.admin-nav a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.admin-nav a:hover {
+    background-color: #ddd;
+}
+
+.admin-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Стили для формы добавления книги */
+#addBookForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#addBookForm input[type="text"],
+#addBookForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#addBookForm button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
