@@ -10,10 +10,20 @@
     <div class="book-info">
         <h1 id="book-title"></h1>
         <h2 id="book-author"></h2>
-        <h3 id="book-genre"></h3>
         <img id="book-cover" alt="Book Cover">
+        <div id="book-created"></div>
+        <div id="book-quotes"></div>
+        <div id="book-reviews"></div>
     </div>
-
+    <div class="add-section">
+        <h3>Добавить цитату</h3>
+        <textarea id="quote-text" placeholder="Введите цитату..."></textarea>
+        <button id="add-quote-btn">Добавить цитату</button>
+        <h3>Добавить рецензию</h3>
+        <textarea id="review-text" placeholder="Введите рецензию..."></textarea>
+        <button id="add-review-btn">Добавить рецензию</button>
+    </div>
+    <script src="js/book_info.js"></script>
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
@@ -24,7 +34,6 @@
                     if (data.book) {
                         document.getElementById('book-title').textContent = data.book.name;
                         document.getElementById('book-author').textContent = `${data.book.first_name || ''} ${data.book.last_name || ''}`;
-                        document.getElementById('book-genre').textContent = data.book.genre || '';
                         if (data.book.coverimage_filename) {
                             document.getElementById('book-cover').src = 'styles/images/' + data.book.coverimage_filename;
                         }

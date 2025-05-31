@@ -23,20 +23,20 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = true;
             submitButton.innerHTML = '<span class="loading-spinner"></span>';
 
-            const response = await fetch('/api/register', {
+            const response = await fetch('/BookTalks-site/backend/register.php', {
                 method: 'POST',
                 body: formData
             });
 
             const result = await response.json();
 
-            if (response.ok) {
+            if (response.ok && result.success) {
                 showNotification('Регистрация успешна! Перенаправление...', 'success');
                 setTimeout(() => {
-                    window.location.href = '/';
+                    window.location.href = '/BookTalks-site/frontend/profile.html';
                 }, 1000);
             } else {
-                showNotification(result.message || 'Ошибка регистрации');
+                showNotification(result.error || 'Ошибка регистрации');
             }
         } catch (error) {
             console.error('Ошибка:', error);

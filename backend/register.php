@@ -1,7 +1,9 @@
 <?php
 // backend/register.php
 
-require_once 'db.php'; // Подключение к базе данных
+require_once 'db.php';
+session_start();
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nickname = trim($_POST['nickname'] ?? '');
@@ -12,9 +14,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
+    // Валидация
     if (!$nickname || !$email || !$password) {
         http_response_code(400);
         echo json_encode(['error' => 'Никнейм, почта и пароль обязательны']);
+        exit;
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Некорректный email']);
+        exit;
+    }
+    if (strlen($password) < 6) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Пароль должен быть не менее 6 символов']);
+        exit;
+    }
+
+    // Проверка уникальности
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM user WHERE email = ? OR nickname = ?');
+    $stmt->execute([$email, $nickname]);
+    if ($stmt->fetchColumn() > 0) {
+        http_response_code(409);
+        echo json_encode(['error' => 'Пользователь с таким никнеймом или email уже существует']);
         exit;
     }
 
@@ -34,15 +56,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $stmt = $pdo->prepare('INSERT INTO users (username, email, password, first_name, last_name, sex, birth_date, nickname, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO user (nickname, email, password, first_name, last_name, sex, birth_date, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
     try {
         $stmt->execute([
-            $nickname, $email, $hashedPassword, $firstName, $lastName, $sex, $birthDate, $nickname, $profileImagePath
+            $nickname, $email, $hashedPassword, $firstName, $lastName, $sex, $birthDate, $profileImagePath
         ]);
+        $user_id = $pdo->lastInsertId();
+        // Автоматический вход
+        $_SESSION['user_id'] = $user_id;
+        $_SESSION['user'] = [
+            'nickname' => $nickname,
+            'email' => $email
+        ];
         echo json_encode(['success' => true, 'profile_image_url' => $profileImagePath]);
     } catch (PDOException $e) {
-        http_response_code(409);
-        echo json_encode(['error' => 'Пользователь с таким никнеймом или email уже существует']);
+        http_response_code(500);
+        echo json_encode(['error' => 'Ошибка регистрации']);
     }
 } else {
     http_response_code(405);

@@ -12,8 +12,13 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Получение основных данных пользователя
+$stmt = $pdo->prepare('SELECT id, nickname, email, first_name, last_name, sex, birth_date, profile_image FROM user WHERE id = ?');
+$stmt->execute([$user_id]);
+$user = $stmt->fetch();
+
 // Получение книг пользователя
-$stmt = $pdo->prepare('SELECT b.id, b.name, b.coverimage_filename, r.amount AS rating FROM user_books ub
+$stmt = $pdo->prepare('SELECT b.id, b.name, b.coverimage_filename, r.amount AS rating FROM user_book ub
                       JOIN book b ON ub.book_id = b.id
                       LEFT JOIN rating r ON b.id = r.book_id AND r.user_id = ?
                       WHERE ub.user_id = ?');
@@ -36,6 +41,7 @@ $quotes = $stmt->fetchAll();
 
 header('Content-Type: application/json');
 echo json_encode([
+    'user' => $user,
     'books' => $books,
     'reviews' => $reviews,
     'quotes' => $quotes

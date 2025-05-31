@@ -9,10 +9,9 @@ if (!$id) {
     echo json_encode(['error' => 'ID книги не указан']);
     exit;
 }
-$sql = 'SELECT b.id, b.name, a.first_name, a.last_name, g.name AS genre, b.coverimage_filename, b.created_at
+$sql = 'SELECT b.id, b.name, a.first_name, a.last_name, b.coverimage_filename, b.created_at
         FROM book b
         LEFT JOIN author a ON b.author_id = a.id
-        LEFT JOIN genre g ON b.genre_id = g.id
         WHERE b.id = ?';
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);

@@ -2,19 +2,21 @@
 // backend/login.php
 require_once 'db.php';
 session_start();
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
+    $login = trim($_POST['email'] ?? ''); // email или nickname
     $password = $_POST['password'] ?? '';
 
-    if (!$email || !$password) {
+    if (!$login || !$password) {
         http_response_code(400);
-        echo json_encode(['error' => 'Почта и пароль обязательны']);
+        echo json_encode(['error' => 'Почта/ник и пароль обязательны']);
         exit;
     }
 
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
-    $stmt->execute([$email]);
+    // Поиск по email или nickname
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE email = ? OR nickname = ?');
+    $stmt->execute([$login, $login]);
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
@@ -32,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]]);
     } else {
         http_response_code(401);
-        echo json_encode(['error' => 'Неверная почта или пароль']);
+        echo json_encode(['error' => 'Неверная почта/ник или пароль']);
     }
 } else {
     http_response_code(405);

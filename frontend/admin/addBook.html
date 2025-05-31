@@ -30,9 +30,6 @@
                 <label for="author_id">ID Автора:</label><br>
                 <input type="number" id="author_id" name="author_id"><br><br>
 
-                <label for="genre_id">ID Жанра:</label><br>
-                <input type="number" id="genre_id" name="genre_id"><br><br>
-
                 <label for="coverimage_filename">Имя файла обложки:</label><br>
                 <input type="text" id="coverimage_filename" name="coverimage_filename"><br><br>
 
@@ -51,7 +48,6 @@
         async function addBook() {
             const name = document.getElementById('name').value;
             const authorID = parseInt(document.getElementById('author_id').value, 10); // Parse to number
-            const genreID = parseInt(document.getElementById('genre_id').value, 10);   // Parse to number
             const coverImageFilename = document.getElementById('coverimage_filename').value;
             const description = document.getElementById('description').value;
             const status = document.getElementById('addBookStatus');
@@ -59,7 +55,6 @@
             const bookData = {
                 name: name,
                 author_id: authorID,
-                genre_id: genreID,
                 coverimage_filename: coverImageFilename,
                 description: description //  Включите описание
             };

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let valid = true;
         if (!email) {
-            document.getElementById('emailError').textContent = 'Введите почту';
+            document.getElementById('emailError').textContent = 'Введите почту или ник';
             valid = false;
         }
         if (!password) {
@@ -30,9 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                window.location.href = '/BookTalks-site/frontend/main.html';
+                window.location.href = '/BookTalks-site/frontend/profile.html';
             } else {
                 document.getElementById('loginError').textContent = data.error || 'Ошибка входа';
+                // Если ошибка авторизации, предложить регистрацию
+                if (data.error && data.error.includes('Неверная')) {
+                    const regLink = document.createElement('a');
+                    regLink.href = '/BookTalks-site/frontend/registration.html';
+                    regLink.textContent = 'Зарегистрироваться';
+                    regLink.style.marginLeft = '10px';
+                    document.getElementById('loginError').appendChild(regLink);
+                }
             }
         })
         .catch(() => {

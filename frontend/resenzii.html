@@ -41,93 +41,9 @@
         </a>
     </header>
     <div class="container">
-
-    <div class="resenz">
-        <div class="resBook">
-            <div class="book">
-                <img src="./styles/images/grozovoi.png" class="knizka">
-                <div class="name">
-                    <p class="nameBook">Грозовой перевал</p>
-                    <p class="author">Эмили Бронте</p>
-                </div>
-                <div class="rating">★ 4,1</div>
-            </div>
-            <div class="score">
-                <p class="myScore">Моя оценка: 5</p>
-            </div>
-            <div class="res">
-                <div class="res-title">Рецензия</div>
-                <hr class="res-line">
-                <div class="res-disc">Я прочитала этот роман ещё в январе и всё это время размышляла, понравился он
-                    мне или нет. До конца не определилась, но точно равнодушной он не оставил.
-                    Читая эту книгу, полностью погружаешься в атмосферу 18 века. Чувствуешь и холод, и жару, слышишь
-                    стук дверей, ощущаешь ненависть и любовь.
-                    Что касается любви Хитклифа и Кэтрин — вроде как это должна быть центральная тема, такая
-                    безумная и сильная любовь. Но Кэтрин умирает в середине романа, и дальше про эту любовь особо
-                    ничего не говорится, только что Хитклиф страдал все 18 лет. Мне понравился способ изложения —
-                    рассказ ключницы своему временному хозяину. В общем, это странная, но захватывающая книга об
-                    любви главных героев, о ненависти и мести</div>
-                <div class="personName">Darya</div>
-            </div>
-
+        <div class="resenz">
+            <!-- Динамический вывод рецензий через JS -->
         </div>
-        <div class="resBook">
-            <div class="book">
-                <img src="./styles/images/gonewiththewind.png" class="knizka">
-                <div class="name">
-                    <p class="nameBook">Унесенные ветром</p>
-                    <p class="author">Маргарет Митчелл</p>
-                </div>
-                <div class="rating">★ 4,1</div>
-            </div>
-            <div class="score">
-                <p class="myScore">Моя оценка: 5</p>
-            </div>
-            <div class="res">
-                <div class="res-title">Рецензия</div>
-                <hr class="res-line">
-                <div class="res-disc">Обычно я люблю писать простыню, любительную или ругательную. Но, думаю, что
-                    этот роман не нуждается в очередном хвалебном отзыве. Да и что нового я могу сказать? Что
-                    история захватывает и не отпускает? Да. Что язык хорош? Безусловно. Что герои прекрасны, а
-                    иногда ужасны и противоречивы? Всё так.
-
-                    Жалею только от об одном, что так долго уклонялась от романа - пугал объем книги. Но едва я
-                    взялась за книгу, все страхи улетучились, история закрутила и захватила, и хотя я десятки раз
-                    смотрела экранизацию, все равно открыла для себя много нового.
-
-                    В общем, этой истории по пятибалльной шкале я поставлю десять</div>
-                <div class="personName">Varya</div>
-            </div>
-
-        </div>
-        <div class="resBook">
-            <div class="book">
-                <img src="./styles/images/frankenshtein.png" class="knizka">
-                <div class="name">
-                    <p class="nameBook">Франкенштейн</p>
-                    <p class="author">Мэри Шелли</p>
-                </div>
-                <div class="rating">★ 4,1</div>
-            </div>
-
-            <div class="score">
-                <p class="myScore">Моя оценка: 5</p>
-            </div>
-            <div class="res">
-                <div class="res-title">Рецензия</div>
-                <hr class="res-line">
-                <div class="res-disc">Как оказалось, мои познания об этой истории оказались крайне поверхностными: я
-                    знала что кто-то создал чудовище и звали его Франкенштейн, а по факту имени у него не было
-                    никакого.
-                    История интересная, но главный герой очень раздражал и бесил, своей изнеженностью и полным
-                    отсутствием заботы о том, кого создал!
-                    И как жаль было его. Последствия гордыни человека. Когда замахиваешься на то, что не
-                    подвластно.</div>
-                <div class="personName">Tolya</div>
-            </div>
-
-        </div>
-    </div>
     </div>
     <footer>
         <div class="footer-content">
@@ -190,6 +106,7 @@ fetch('/BookTalks-site/backend/check_auth.php')
     }
   });
 </script>
+<script src="js/resenzii.js"></script>
 </body>
 
 </html>
