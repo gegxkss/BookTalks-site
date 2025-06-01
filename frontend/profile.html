@@ -42,17 +42,19 @@
     </header>
     <div class="container">
         <div class="about">
-            <img src="./styles/images/icon.png" alt="icon" class="personIcon">
-            <p class="personName">Динусик_2006</p>
+            <img id="profile-image" alt="icon" class="personIcon">
+            <div class="personDetails">
+                <p class="personNickname" id="profile-nickname"></p>
+            </div>
         </div>
-
         <div class="info">
             <div class="info-title">Информация</div>
             <hr class="info-line">
-            <div class="info-item">Имя: Дина</div>
-            <div class="info-item">Фамилия: Бачурина</div>
-            <div class="info-item">Пол: женский</div>
-            <div class="info-item">Дата рождения: 27.10.2006</div>
+            <div class="info-item">Имя: <span id="profile-name"></span></div>
+            <div class="info-item">Фамилия: <span id="profile-lastname"></span></div>
+            <div class="info-item">Пол: <span id="profile-sex"></span></div>
+            <div class="info-item">Дата рождения: <span id="profile-birthdate"></span></div>
+            <div class="info-item">Email: <span id="profile-email"></span></div>
         </div>
 
         <div class = 'all-add'>
@@ -171,6 +173,7 @@
         </div>
     </footer>
     <script src="reg.js"></script>
+    <script src="js/profile.js"></script>
     <script>
 fetch('/BookTalks-site/backend/check_auth.php')
   .then(res => res.json())

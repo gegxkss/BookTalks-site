@@ -26,7 +26,7 @@ table user_book {
   book_id int
 }
 
-table rewiew {
+table review {
   id serial [primary key]
   user_id int
   book_id int
@@ -54,11 +54,11 @@ table user{
 }
 ref: "book"."id" < "rating"."book_id"
 
-Ref: "book"."id" < "rewiew"."book_id"
+Ref: "book"."id" < "review"."book_id"
 
 Ref: "book"."id" < "quote"."book_id"
 
-Ref: "user"."id" < "rewiew"."user_id"
+Ref: "user"."id" < "review"."user_id"
 
 Ref: "user"."id" < "quote"."user_id"
 

@@ -20,3 +20,4 @@ try {
     echo json_encode(['error' => 'Ошибка подключения к базе данных']);
     exit;
 }
+

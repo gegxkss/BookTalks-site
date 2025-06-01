@@ -408,6 +408,126 @@
                         alert('Произошла ошибка при отправке запроса.');
                     });
             };*/
+
+            // Добавление динамического блока для книги
+            const bookId = new URLSearchParams(window.location.search).get('id');
+            if (bookId) {
+                fetch(`/BookTalks-site/backend/book_info.php?id=${bookId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.book) {
+                            document.querySelector('.nameBook').textContent = data.book.name;
+                            document.querySelector('.author').textContent = `${data.book.author_first_name} ${data.book.author_last_name}`;
+                            document.querySelector('.knizka').src = `styles/images/${data.book.coverimage_filename}`;
+                        }
+                    });
+
+                fetch(`/BookTalks-site/backend/reviews_list.php?book_id=${bookId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const reviewSlider = document.getElementById('review-slider .slider-wrapper');
+                        reviewSlider.innerHTML = '';
+                        data.reviews.forEach(review => {
+                            const slide = document.createElement('div');
+                            slide.className = 'slide';
+                            slide.innerHTML = `
+                                <p>${review.text}</p>
+                                <p>Автор: ${review.user_nickname}</p>
+                            `;
+                            reviewSlider.appendChild(slide);
+                        });
+                    });
+
+                fetch(`/BookTalks-site/backend/quotes_list.php?book_id=${bookId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const quoteSlider = document.getElementById('quote-slider .slider-wrapper');
+                        quoteSlider.innerHTML = '';
+                        data.quotes.forEach(quote => {
+                            const slide = document.createElement('div');
+                            slide.className = 'slide';
+                            slide.innerHTML = `
+                                <p>${quote.text}</p>
+                                <p>Автор: ${quote.user_nickname}</p>
+                            `;
+                            quoteSlider.appendChild(slide);
+                        });
+                    });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookId = new URLSearchParams(window.location.search).get('id');
+
+            // Функция для отправки данных на сервер
+            function sendDataToServer(endpoint, data) {
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Данные успешно добавлены!');
+                        location.reload();
+                    } else {
+                        alert('Ошибка при добавлении данных.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                });
+            }
+
+            // Обработчик для кнопки "Добавить рецензию"
+            document.querySelector('#add-review-popup .close-popup-button:first-child').addEventListener('click', function () {
+                const reviewText = document.querySelector('#add-review-popup textarea').value;
+                if (reviewText && bookId) {
+                    sendDataToServer('/BookTalks-site/backend/add_review.php', {
+                        book_id: bookId,
+                        text: reviewText
+                    });
+                } else {
+                    alert('Введите текст рецензии.');
+                }
+            });
+
+            // Обработчик для кнопки "Добавить цитату"
+            document.querySelector('#add-quote-popup .close-popup-button:first-child').addEventListener('click', function () {
+                const quoteText = document.querySelector('#add-quote-popup textarea').value;
+                if (quoteText && bookId) {
+                    sendDataToServer('/BookTalks-site/backend/add_quote.php', {
+                        book_id: bookId,
+                        text: quoteText
+                    });
+                } else {
+                    alert('Введите текст цитаты.');
+                }
+            });
+
+            // Обработчик для кнопки "Поставить оценку"
+            document.querySelector('#rate-book-popup .close-popup-button:first-child').addEventListener('click', function () {
+                const rating = document.querySelector('.star-rating .star.selected')?.dataset.rating;
+                if (rating && bookId) {
+                    sendDataToServer('/BookTalks-site/backend/add_rating.php', {
+                        book_id: bookId,
+                        amount: rating
+                    });
+                } else {
+                    alert('Выберите оценку.');
+                }
+            });
+
+            // Обработчик выбора звезды для оценки
+            document.querySelectorAll('.star-rating .star').forEach(star => {
+                star.addEventListener('click', function () {
+                    document.querySelectorAll('.star-rating .star').forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
         });
     </script>
 </body>

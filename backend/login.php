@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Поиск по email или nickname
-    $stmt = $pdo->prepare('SELECT * FROM user WHERE email = ? OR nickname = ?');
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ? OR nickname = ?');
     $stmt->execute([$login, $login]);
     $user = $stmt->fetch();
 

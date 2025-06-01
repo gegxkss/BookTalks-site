@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'Все поля обязательны']);
         exit;
     }
-    $stmt = $pdo->prepare('INSERT INTO rewiew (book_id, user_id, text) VALUES (?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO review (book_id, user_id, text) VALUES (?, ?, ?)');
     $stmt->execute([$book_id, $_SESSION['user_id'], $text]);
     echo json_encode(['success' => true]);
 } else {

@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Проверка уникальности
-    $stmt = $pdo->prepare('SELECT COUNT(*) FROM user WHERE email = ? OR nickname = ?');
+
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE email = ? OR nickname = ?');
     $stmt->execute([$email, $nickname]);
     if ($stmt->fetchColumn() > 0) {
         http_response_code(409);
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $stmt = $pdo->prepare('INSERT INTO user (nickname, email, password, first_name, last_name, sex, birth_date, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO users (nickname, email, password, first_name, last_name, sex, birth_date, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
     try {
         $stmt->execute([
             $nickname, $email, $hashedPassword, $firstName, $lastName, $sex, $birthDate, $profileImagePath
