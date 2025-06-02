@@ -12,34 +12,18 @@
         <h2 id="book-author"></h2>
         <img id="book-cover" alt="Book Cover">
         <div id="book-created"></div>
-        <div id="book-quotes"></div>
-        <div id="book-reviews"></div>
+        <div class="actions">
+            <button id="add-review-btn">Добавить рецензию</button>
+            <button id="add-quote-btn">Добавить цитату</button>
+            <button id="add-rating-btn">Поставить оценку</button>
+        </div>
     </div>
-    <div class="add-section">
-        <h3>Добавить цитату</h3>
-        <textarea id="quote-text" placeholder="Введите цитату..."></textarea>
-        <button id="add-quote-btn">Добавить цитату</button>
-        <h3>Добавить рецензию</h3>
-        <textarea id="review-text" placeholder="Введите рецензию..."></textarea>
-        <button id="add-review-btn">Добавить рецензию</button>
-    </div>
+    <div id="popup-bg" class="popup-bg" style="display:none;"></div>
+    <div id="popup" class="popup" style="display:none;"></div>
+    <h2>Цитаты</h2>
+    <div id="quotes-carousel" class="carousel"></div>
+    <h2>Рецензии</h2>
+    <div id="reviews-carousel" class="carousel"></div>
     <script src="js/book_info.js"></script>
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-        if (id) {
-            fetch(`/BookTalks-site/backend/book_info.php?id=${id}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.book) {
-                        document.getElementById('book-title').textContent = data.book.name;
-                        document.getElementById('book-author').textContent = `${data.book.first_name || ''} ${data.book.last_name || ''}`;
-                        if (data.book.coverimage_filename) {
-                            document.getElementById('book-cover').src = 'styles/images/' + data.book.coverimage_filename;
-                        }
-                    }
-                });
-        }
-    </script>
 </body>
 </html>

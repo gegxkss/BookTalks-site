@@ -463,3 +463,29 @@ footer {
 .star.active {
   color: #382A24; /* Желтый цвет при наведении или выборе */
 }
+
+.profile-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 6px;
+    object-fit: cover;
+}
+.carousel-author-link {
+    text-decoration: none;
+    color: #382A24;
+    margin-left: 2px;
+    transition: none;
+}
+.carousel-author-link:visited,
+.carousel-author-link:active,
+.carousel-author-link:focus {
+    color: #382A24;
+    outline: none;
+    box-shadow: none;
+}
+.carousel-author-link:hover {
+    text-decoration: underline;
+    color: #6d4c41;
+}

@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - BookTalks</title>
-    <link rel="stylesheet" href="../style_main.css">  <!-- Используем общие стили -->
+    <title>Добавить автора - BookTalks</title>
+    <link rel="stylesheet" href="../style_main.css">
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <header class="header">
-        <!-- Здесь может быть логотип и навигация, как на основном сайте -->
         Admin Panel - BookTalks
     </header>
 
@@ -24,13 +23,20 @@
         </nav>
 
         <section class="admin-content">
-            <h2>Добро пожаловать в панель администратора!</h2>
-            <p>Выберите раздел в навигации слева.</p>
+            <h2>Добавить нового автора</h2>
+            <form id="addAuthorForm">
+                <label for="authorFirstName">Имя:</label><br>
+                <input type="text" id="authorFirstName" name="authorFirstName" required><br><br>
+
+                <label for="authorLastName">Фамилия:</label><br>
+                <input type="text" id="authorLastName" name="authorLastName" required><br><br>
+
+                <button type="submit">Добавить</button>
+            </form>
+            <p id="addAuthorStatus"></p>
         </section>
     </main>
 
-    <footer>
-        <!-- Здесь может быть футер -->
-    </footer>
+    <script src="admin.js"></script>
 </body>
 </html>

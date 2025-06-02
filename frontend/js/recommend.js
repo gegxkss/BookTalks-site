@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Динамическая загрузка всех книг в библиотеке
+    // Динамическая загрузка книг для страницы "Что почитать"
     function renderBooks(books) {
-        const container = document.getElementById('books-list');
+        const container = document.querySelector('.top');
         if (!container) return;
         container.innerHTML = '';
         books.forEach(book => {

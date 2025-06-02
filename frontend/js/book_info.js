@@ -17,62 +17,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-    // Загрузка цитат
-    fetch(`/BookTalks-site/backend/book_quotes.php?book_id=${id}`)
+    // Проверка авторизации
+    let isAuthenticated = false;
+    fetch('/BookTalks-site/backend/check_auth.php', { credentials: 'same-origin' })
         .then(res => res.json())
         .then(data => {
-            const quotesDiv = document.getElementById('book-quotes');
-            quotesDiv.innerHTML = '<h3>Цитаты</h3>';
-            if (data.quotes && data.quotes.length > 0) {
-                data.quotes.forEach(q => {
-                    const p = document.createElement('p');
-                    p.textContent = q.text;
-                    quotesDiv.appendChild(p);
-                });
+            isAuthenticated = !!data.authenticated;
+            if (!isAuthenticated) {
+                document.getElementById('add-review-btn').onclick = showAuthWarning;
+                document.getElementById('add-quote-btn').onclick = showAuthWarning;
+                document.getElementById('add-rating-btn').onclick = showAuthWarning;
             } else {
-                quotesDiv.innerHTML += '<p>Нет цитат</p>';
+                document.getElementById('add-review-btn').onclick = showReviewPopup;
+                document.getElementById('add-quote-btn').onclick = showQuotePopup;
+                document.getElementById('add-rating-btn').onclick = showRatingPopup;
             }
         });
 
-    // Загрузка рецензий
-    fetch(`/BookTalks-site/backend/book_reviews.php?book_id=${id}`)
-        .then(res => res.json())
-        .then(data => {
-            const reviewsDiv = document.getElementById('book-reviews');
-            reviewsDiv.innerHTML = '<h3>Рецензии</h3>';
-            if (data.reviews && data.reviews.length > 0) {
-                data.reviews.forEach(r => {
-                    const p = document.createElement('p');
-                    p.textContent = r.text;
-                    reviewsDiv.appendChild(p);
-                });
-            } else {
-                reviewsDiv.innerHTML += '<p>Нет рецензий</p>';
-            }
-        });
+    function showAuthWarning() {
+        showPopup('Только для зарегистрированных пользователей!');
+    }
 
-    // Добавление цитаты
-    document.getElementById('add-quote-btn').onclick = function() {
-        const text = document.getElementById('quote-text').value.trim();
-        if (!text) return;
-        fetch('/BookTalks-site/backend/add_quote.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `book_id=${id}&text=${encodeURIComponent(text)}`
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            } else {
-                alert(data.error || 'Ошибка добавления цитаты');
-            }
-        });
-    };
+    function showPopup(html) {
+        const bg = document.getElementById('popup-bg');
+        const popup = document.getElementById('popup');
+        popup.innerHTML = html + '<br><button onclick="closePopup()">Закрыть</button>';
+        bg.style.display = popup.style.display = 'block';
+    }
+    function closePopup() {
+        document.getElementById('popup-bg').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    }
 
-    // Добавление рецензии
-    document.getElementById('add-review-btn').onclick = function() {
-        const text = document.getElementById('review-text').value.trim();
+    function showReviewPopup() {
+        showPopup('<h3>Добавить рецензию</h3><textarea id="review-text-popup" rows="5" style="width:100%"></textarea><br><button onclick="submitReview()">Сохранить</button>');
+    }
+    function showQuotePopup() {
+        showPopup('<h3>Добавить цитату</h3><textarea id="quote-text-popup" rows="3" style="width:100%"></textarea><br><button onclick="submitQuote()">Сохранить</button>');
+    }
+    function showRatingPopup() {
+        showPopup('<h3>Поставить оценку</h3><input id="rating-value" type="number" min="1" max="10" style="width:60px"> <button onclick="submitRating()">Сохранить</button>');
+    }
+
+    window.closePopup = closePopup;
+    window.submitReview = function() {
+        const text = document.getElementById('review-text-popup').value.trim();
         if (!text) return;
         fetch('/BookTalks-site/backend/add_review.php', {
             method: 'POST',
@@ -81,13 +70,61 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(res => res.json())
         .then(data => {
-            if (data.success) {
-                location.reload();
-            } else {
-                alert(data.error || 'Ошибка добавления рецензии');
-            }
+            if (data.success) location.reload();
+            else alert(data.error || 'Ошибка добавления рецензии');
         });
-    };
+    }
+    window.submitQuote = function() {
+        const text = document.getElementById('quote-text-popup').value.trim();
+        if (!text) return;
+        fetch('/BookTalks-site/backend/add_quote.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `book_id=${id}&text=${encodeURIComponent(text)}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) location.reload();
+            else alert(data.error || 'Ошибка добавления цитаты');
+        });
+    }
+    window.submitRating = function() {
+        const value = document.getElementById('rating-value').value;
+        if (!value || value < 1 || value > 10) return alert('Оценка от 1 до 10');
+        fetch('/BookTalks-site/backend/add_rating.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `book_id=${id}&amount=${encodeURIComponent(value)}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) location.reload();
+            else alert(data.error || 'Ошибка добавления оценки');
+        });
+    }
+
+    // Загрузка цитат и рецензий с авторами
+    fetch(`/BookTalks-site/backend/book_quotes.php?book_id=${id}`)
+        .then(res => res.json())
+        .then(data => renderCarousel(data.quotes, 'quotes-carousel', 'quote'));
+    fetch(`/BookTalks-site/backend/book_reviews.php?book_id=${id}`)
+        .then(res => res.json())
+        .then(data => renderCarousel(data.reviews, 'reviews-carousel', 'review'));
+
+    // Карусель цитат и рецензий
+    function renderCarousel(items, containerId, type) {
+        const cont = document.getElementById(containerId);
+        if (!items || !items.length) {
+            cont.innerHTML = '<p>Нет данных</p>';
+            return;
+        }
+        let html = '<div class="carousel-inner">';
+        items.forEach(item => {
+            html += `<div class="carousel-item"><div class="carousel-text">${item.text}</div><div class="carousel-author">${item.nickname || 'Аноним'}</div></div>`;
+        });
+        html += '</div>';
+        cont.innerHTML = html;
+    }
 
     // Поиск книг (в шапке)
     const searchInput = document.querySelector('.search-input');

@@ -43,16 +43,16 @@
 
     <div class="container">
         <div class="book">
-            <img src="./styles/images/gonewiththewind.png" class="knizka">
+            <img src="" class="knizka" id="book-cover">
             <div class="name">
-                <p class="nameBook">Унесенные ветром</p>
-                <p class="author">Маргарет Митчелл</p>
+                <p class="nameBook" id="book-title"></p>
+                <p class="author" id="book-author"></p>
             </div>
-            <div class="rating">★ 4,1</div>
+            <div class="rating" id="book-rating"></div>
         </div>
         <div class="button-conteiner">
-            <button class="open-popup-button" data-popup="add-review">Добавить цитату</button>
-            <button class="open-popup-button" data-popup="add-quote">Добавить рецензию</button>
+            <button class="open-popup-button" data-popup="add-review">Добавить рецензию</button>
+            <button class="open-popup-button" data-popup="add-quote">Добавить цитату</button>
             <button class="open-popup-button" data-popup="rate-book">Поставить оценку</button>
         </div>
 
@@ -66,9 +66,7 @@
                 </svg>
             </button>
             <div class="slider-wrapper">
-                <div class="slide">
-                    <!-- Здесь будет цитата -->
-                </div>
+                <!-- Цитаты будут подгружаться динамически -->
             </div>
             <button class="slider-button next" data-slider="quote">
                 <svg width="13" height="24" viewBox="0 0 13 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,9 +87,7 @@
                 </svg>
             </button>
             <div class="slider-wrapper">
-                <div class="slide">
-                    <!-- Здесь будет рецензия -->
-                </div>
+                <!-- Рецензии будут подгружаться динамически -->
             </div>
             <button class="slider-button next" data-slider="review">
                 <svg width="13" height="24" viewBox="0 0 13 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,21 +98,20 @@
         </div>
         <!-- Попап меню для добавления рецензии -->
         <div class="popup-menu" id="add-review-popup">
-            <p>Добавить цитату</p>
+            <p>Добавить рецензию</p>
             <textarea placeholder="Напишите вашу рецензию"></textarea>
-            <button class="close-popup-button">Сохранить</button>
+            <button class="close-popup-button save">Сохранить</button>
             <button class="close-popup-button">Отмена</button>
         </div>
 
         <!-- Попап меню для добавления цитаты -->
         <div class="popup-menu" id="add-quote-popup">
-            <p>Добавить рецензию</p>
+            <p>Добавить цитату</p>
             <textarea placeholder="Напишите цитату"></textarea>
-            <button class="close-popup-button">Сохранить</button>
+            <button class="close-popup-button save">Сохранить</button>
             <button class="close-popup-button">Отмена</button>
         </div>
 
-        <!-- Попап меню для оценки книги -->
         <!-- Попап меню для оценки книги -->
         <div class="popup-menu" id="rate-book-popup">
             <h2>Оценить книгу</h2>
@@ -157,7 +152,7 @@
                     </svg>
                 </span>
             </div>
-            <button class="close-popup-button">Сохранить</button>
+            <button class="close-popup-button save">Сохранить</button>
             <button class="close-popup-button">Отмена</button>
         </div>
 
@@ -215,321 +210,7 @@
             © BookTalks 2024. All rights reserved
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Получаем все кнопки открытия попап
-            const openPopupButtons = document.querySelectorAll('.open-popup-button');
-            // Получаем все попап меню
-            const popupMenus = document.querySelectorAll('.popup-menu');
-            // Получаем оверлей
-            const overlay = document.querySelector('.overlay');
-
-            // Функция для открытия попап меню
-            function openPopup(popupId) {
-                // Скрываем все попап меню
-                popupMenus.forEach(popupMenu => popupMenu.classList.remove('show'));
-                // Показываем оверлей
-                overlay.classList.add('show');
-                // Показываем нужное попап меню
-                document.getElementById(popupId + '-popup').classList.add('show');
-            }
-
-            // Функция для закрытия попап меню
-            function closePopup() {
-                // Скрываем все попап меню
-                popupMenus.forEach(popupMenu => popupMenu.classList.remove('show'));
-                // Скрываем оверлей
-                overlay.classList.remove('show');
-            }
-
-            // Добавляем обработчик событий для каждой кнопки открытия попап
-            openPopupButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const popupId = this.dataset.popup;
-                    openPopup(popupId);
-                });
-            });
-
-            // Добавляем обработчик событий для каждой кнопки закрытия попап
-            popupMenus.forEach(popupMenu => {
-                const closeButtons = popupMenu.querySelectorAll('.close-popup-button');
-                closeButtons.forEach(button => {
-                    button.addEventListener('click', closePopup);
-                });
-            });
-
-            // Добавляем обработчик событий для оверлея, чтобы закрывать попап при клике вне попап меню
-            overlay.addEventListener('click', closePopup);
-            // Логика звездного рейтинга
-            const starRating = document.querySelector('#rate-book-popup .star-rating');
-            const stars = document.querySelectorAll('#rate-book-popup .star');
-            let currentRating = 0;
-
-            stars.forEach(star => {
-                star.addEventListener('click', function () {
-                    const rating = parseInt(this.dataset.rating);
-                    currentRating = rating;
-
-                    // Заполняем звезды до выбранной
-                    stars.forEach(s => {
-                        if (parseInt(s.dataset.rating) <= rating) {
-                            s.classList.add('active');
-                        } else {
-                            s.classList.remove('active');
-                        }
-                    });
-
-                    console.log('Rating:', currentRating); // Выводим оценку в консоль
-                });
-            });
-
-            // Данные для слайдера цитат
-            const quoteSlides = [
-                {
-                    text: "Я фанат творчества Харуки Мураками – у меня есть все его книги. Какие-то западают в душу, некоторые не особо впечатляют. Но откровенно плохих у данного автора нет ни одной книги. \"Норвежский лес \" уже много раз мной был читан– перечитан и всё равно находишь такое что раньше не разглядел, а теперь тебя бьёт разрядом тока и ты понимаешь, что эту историю ты уже никогда не забудешь. Непростая история, которая новичку не понравится, если он конечно ещё не знаком с особенностями азиатской литературы. Но когда целиком и полностью погружаешься в книгу, то с большим трудом возвращаешься к нормальной жизни.",
-                    author: "toxissss"
-                },
-                {
-                    text: "Вторая цитата...",
-                    author: "Автор 2"
-                },
-                {
-                    text: "Третья цитата...",
-                    author: "Автор 3"
-                }
-            ];
-
-            // Данные для слайдера рецензий
-            const reviewSlides = [
-                {
-                    text: "Отличная книга, очень рекомендую!",
-                    author: "Читатель 1"
-                },
-                {
-                    text: "Книга на любителя, мне не очень понравилась.",
-                    author: "Читатель 2"
-                },
-                {
-                    text: "Захватывающий сюжет и интересные персонажи.",
-                    author: "Читатель 3"
-                }
-            ];
-
-            // Функция для инициализации слайдера
-            function initSlider(sliderId, slides) {
-                const sliderContainer = document.getElementById(sliderId + '-slider');
-                const sliderWrapper = sliderContainer.querySelector('.slider-wrapper');
-                const prevButton = sliderContainer.querySelector('.slider-button.prev');
-                const nextButton = sliderContainer.querySelector('.slider-button.next');
-                const slideElement = sliderContainer.querySelector('.slide'); // Add this line
-                let currentSlideIndex = 0;
-
-                function updateSlide() {
-                    const currentSlideData = slides[currentSlideIndex];
-                    slideElement.innerHTML = `
-                        <p>${currentSlideData.text}</p>
-                        <p>- ${currentSlideData.author}</p>
-                    `;
-                }
-
-                function showNextSlide() {
-                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-                    updateSlide();
-                }
-
-                function showPrevSlide() {
-                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-                    updateSlide();
-                }
-
-                prevButton.addEventListener('click', showPrevSlide);
-                nextButton.addEventListener('click', showNextSlide);
-
-                updateSlide(); // Initial display
-            }
-
-            // Инициализация слайдеров
-            initSlider('quote', quoteSlides);
-            initSlider('review', reviewSlides);
-            // Функция для отправки рецензии
-            /*window.submitReview = function () {
-                const bookId = /* Вставьте сюда ID книги /;
-                const userId = /* Вставьте сюда ID пользователя /;
-                const reviewText = document.getElementById('reviewText').value;
-
-                fetch(`/books/${bookId}/reviews/add`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        user_id: userId,
-                        text: reviewText
-                    })
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            alert('Рецензия добавлена!');
-                            closePopup(); // Закрыть попап после успешной отправки
-                        } else {
-                            alert('Ошибка при добавлении рецензии.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Ошибка:', error);
-                        alert('Произошла ошибка при отправке запроса.');
-                    });
-            };
-         window.submitQuote = function () {
-                const bookId = /* Вставьте сюда ID книги ;
-                const userId = /* Вставьте сюда ID пользователя ;
-                const quoteText = document.getElementById('quoteText').value;
-
-                fetch(`/books/${bookId}/quotes/add`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        user_id: userId,
-                        text: quoteText
-                    })
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            alert('Цитата добавлена!');
-                            closePopup(); // Закрыть попап после успешной отправки
-                        } else {
-                            alert('Ошибка при добавлении цитаты.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Ошибка:', error);
-                        alert('Произошла ошибка при отправке запроса.');
-                    });
-            };*/
-
-            // Добавление динамического блока для книги
-            const bookId = new URLSearchParams(window.location.search).get('id');
-            if (bookId) {
-                fetch(`/BookTalks-site/backend/book_info.php?id=${bookId}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.book) {
-                            document.querySelector('.nameBook').textContent = data.book.name;
-                            document.querySelector('.author').textContent = `${data.book.author_first_name} ${data.book.author_last_name}`;
-                            document.querySelector('.knizka').src = `styles/images/${data.book.coverimage_filename}`;
-                        }
-                    });
-
-                fetch(`/BookTalks-site/backend/reviews_list.php?book_id=${bookId}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const reviewSlider = document.getElementById('review-slider .slider-wrapper');
-                        reviewSlider.innerHTML = '';
-                        data.reviews.forEach(review => {
-                            const slide = document.createElement('div');
-                            slide.className = 'slide';
-                            slide.innerHTML = `
-                                <p>${review.text}</p>
-                                <p>Автор: ${review.user_nickname}</p>
-                            `;
-                            reviewSlider.appendChild(slide);
-                        });
-                    });
-
-                fetch(`/BookTalks-site/backend/quotes_list.php?book_id=${bookId}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const quoteSlider = document.getElementById('quote-slider .slider-wrapper');
-                        quoteSlider.innerHTML = '';
-                        data.quotes.forEach(quote => {
-                            const slide = document.createElement('div');
-                            slide.className = 'slide';
-                            slide.innerHTML = `
-                                <p>${quote.text}</p>
-                                <p>Автор: ${quote.user_nickname}</p>
-                            `;
-                            quoteSlider.appendChild(slide);
-                        });
-                    });
-            }
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const bookId = new URLSearchParams(window.location.search).get('id');
-
-            // Функция для отправки данных на сервер
-            function sendDataToServer(endpoint, data) {
-                fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Данные успешно добавлены!');
-                        location.reload();
-                    } else {
-                        alert('Ошибка при добавлении данных.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка:', error);
-                });
-            }
-
-            // Обработчик для кнопки "Добавить рецензию"
-            document.querySelector('#add-review-popup .close-popup-button:first-child').addEventListener('click', function () {
-                const reviewText = document.querySelector('#add-review-popup textarea').value;
-                if (reviewText && bookId) {
-                    sendDataToServer('/BookTalks-site/backend/add_review.php', {
-                        book_id: bookId,
-                        text: reviewText
-                    });
-                } else {
-                    alert('Введите текст рецензии.');
-                }
-            });
-
-            // Обработчик для кнопки "Добавить цитату"
-            document.querySelector('#add-quote-popup .close-popup-button:first-child').addEventListener('click', function () {
-                const quoteText = document.querySelector('#add-quote-popup textarea').value;
-                if (quoteText && bookId) {
-                    sendDataToServer('/BookTalks-site/backend/add_quote.php', {
-                        book_id: bookId,
-                        text: quoteText
-                    });
-                } else {
-                    alert('Введите текст цитаты.');
-                }
-            });
-
-            // Обработчик для кнопки "Поставить оценку"
-            document.querySelector('#rate-book-popup .close-popup-button:first-child').addEventListener('click', function () {
-                const rating = document.querySelector('.star-rating .star.selected')?.dataset.rating;
-                if (rating && bookId) {
-                    sendDataToServer('/BookTalks-site/backend/add_rating.php', {
-                        book_id: bookId,
-                        amount: rating
-                    });
-                } else {
-                    alert('Выберите оценку.');
-                }
-            });
-
-            // Обработчик выбора звезды для оценки
-            document.querySelectorAll('.star-rating .star').forEach(star => {
-                star.addEventListener('click', function () {
-                    document.querySelectorAll('.star-rating .star').forEach(s => s.classList.remove('selected'));
-                    this.classList.add('selected');
-                });
-            });
-        });
-    </script>
+    <script src="js/addBook.js"></script>
 </body>
 
 </html>

@@ -29,7 +29,7 @@ function renderBooks(books, containerSelector) {
             <img src="${book.coverimage_filename ? '/BookTalks-site/frontend/' + book.coverimage_filename : 'styles/images/book_about.png'}" alt="Books" class="book_about">
         `;
         bookDiv.onclick = () => {
-            window.location.href = `/BookTalks-site/frontend/book_info.html?id=${book.id}`;
+            window.location.href = `/BookTalks-site/frontend/addBook.html?id=${book.id}`;
         };
         container.appendChild(bookDiv);
     });
@@ -70,7 +70,7 @@ function setupSearch() {
                         const li = document.createElement('li');
                         li.textContent = `${book.name} (${book.first_name ? book.first_name + ' ' : ''}${book.last_name || ''})`;
                         li.onclick = () => {
-                            window.location.href = `/BookTalks-site/frontend/book_info.html?id=${book.id}`;
+                            window.location.href = `/BookTalks-site/frontend/addBook.html?id=${book.id}`;
                         };
                         results.appendChild(li);
                     });

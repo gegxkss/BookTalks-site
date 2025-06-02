@@ -16,6 +16,7 @@
         <nav class="admin-nav">
             <ul>
                 <li><a href="add_book.html">Добавить книгу</a></li>
+                <li><a href="addAuthor.html">Добавить автора</a></li>
                 <li><a href="#">Управление пользователями</a></li>
                 <li><a href="#">Управление рецензиями</a></li>
             </ul>
@@ -23,20 +24,19 @@
 
         <section class="admin-content">
             <h2>Добавить новую книгу</h2>
-            <form id="addBookForm">
+            <form id="addBookForm" enctype="multipart/form-data">
                 <label for="name">Название:</label><br>
-                <input type="text" id="name" name="name"><br><br>
+                <input type="text" id="name" name="name" required><br><br>
 
-                <label for="author_id">ID Автора:</label><br>
-                <input type="number" id="author_id" name="author_id"><br><br>
+                <label for="author_id">Автор:</label><br>
+                <select id="author_id" name="author_id" required>
+                    <!-- Авторы будут загружены динамически -->
+                </select><br><br>
 
-                <label for="coverimage_filename">Имя файла обложки:</label><br>
-                <input type="text" id="coverimage_filename" name="coverimage_filename"><br><br>
+                <label for="cover_image">Обложка (файл):</label><br>
+                <input type="file" id="cover_image" name="cover_image" accept="image/*"><br><br>
 
-                <label for="description">Описание:</label><br>
-                <textarea id="description" name="description"></textarea><br><br>
-
-                <button type="button" onclick="addBook()">Добавить</button>
+                <button type="submit">Добавить</button>
             </form>
             <p id="addBookStatus"></p>
         </section>
@@ -45,42 +45,46 @@
     <footer>
     </footer>
     <script>
-        async function addBook() {
-            const name = document.getElementById('name').value;
-            const authorID = parseInt(document.getElementById('author_id').value, 10); // Parse to number
-            const coverImageFilename = document.getElementById('coverimage_filename').value;
-            const description = document.getElementById('description').value;
-            const status = document.getElementById('addBookStatus');
-
-            const bookData = {
-                name: name,
-                author_id: authorID,
-                coverimage_filename: coverImageFilename,
-                description: description //  Включите описание
-            };
-
+        // Загрузка авторов в select
+        async function loadAuthors() {
+            const select = document.getElementById('author_id');
+            select.innerHTML = '<option value="">Загрузка...</option>';
             try {
-                const response = await fetch('/api/books', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(bookData)
+                const res = await fetch('../../backend/authors_list.php');
+                const data = await res.json();
+                select.innerHTML = '<option value="">Выберите автора</option>';
+                (data.authors || []).forEach(a => {
+                    select.innerHTML += `<option value="${a.id}">${a.first_name} ${a.last_name}</option>`;
                 });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json(); // Получаем ответ от сервера
-                status.textContent = `Книга "${data.name}" успешно добавлена!`; //  <-- Отображаем успешное добавление
-                document.getElementById('addBookForm').reset();
-
-            } catch (error) {
-                console.error('Error adding book:', error);
-                status.textContent = `Ошибка при добавлении книги: ${error.message}`;
+            } catch (e) {
+                select.innerHTML = '<option value="">Ошибка загрузки авторов</option>';
             }
         }
+        loadAuthors();
+
+        // Обработка отправки формы
+        const form = document.getElementById('addBookForm');
+        form.onsubmit = async function(e) {
+            e.preventDefault();
+            const status = document.getElementById('addBookStatus');
+            status.textContent = '';
+            const formData = new FormData(form);
+            try {
+                const res = await fetch('../../backend/admin_add_book.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    status.textContent = 'Книга успешно добавлена!';
+                    form.reset();
+                } else {
+                    status.textContent = data.error || 'Ошибка при добавлении книги';
+                }
+            } catch (err) {
+                status.textContent = 'Ошибка при добавлении книги';
+            }
+        };
     </script>
 </body>
 </html>

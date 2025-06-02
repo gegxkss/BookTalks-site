@@ -4,11 +4,10 @@ require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
-    $genre_id = intval($_POST['genre_id'] ?? 0);
     $author_id = intval($_POST['author_id'] ?? 0);
     $coverimage_filename = null;
 
-    if (!$name || !$genre_id || !$author_id) {
+    if (!$name || !$author_id) {
         http_response_code(400);
         echo json_encode(['error' => 'Все поля обязательны']);
         exit;
@@ -27,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $stmt = $pdo->prepare('INSERT INTO book (name, genre_id, author_id, coverimage_filename) VALUES (?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO book (name, author_id, coverimage_filename) VALUES (?, ?, ?)');
     try {
-        $stmt->execute([$name, $genre_id, $author_id, $coverimage_filename]);
+        $stmt->execute([$name, $author_id, $coverimage_filename]);
         echo json_encode(['success' => true]);
     } catch (PDOException $e) {
         http_response_code(500);
