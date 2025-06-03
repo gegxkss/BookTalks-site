@@ -5,6 +5,11 @@ require_once 'db.php';
 session_start();
 header('Content-Type: application/json');
 
+// Убедимся, что json_encode возвращает строку в UTF-8
+function safe_json($data) {
+    return json_encode($data, JSON_UNESCAPED_UNICODE);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nickname = trim($_POST['nickname'] ?? '');
     $firstName = trim($_POST['first_name'] ?? '');
@@ -17,17 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Валидация
     if (!$nickname || !$email || !$password) {
         http_response_code(400);
-        echo json_encode(['error' => 'Никнейм, почта и пароль обязательны']);
+        echo safe_json(['error' => 'Никнейм, почта и пароль обязательны']);
         exit;
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         http_response_code(400);
-        echo json_encode(['error' => 'Некорректный email']);
+        echo safe_json(['error' => 'Некорректный email']);
         exit;
     }
     if (strlen($password) < 6) {
         http_response_code(400);
-        echo json_encode(['error' => 'Пароль должен быть не менее 6 символов']);
+        echo safe_json(['error' => 'Пароль должен быть не менее 6 символов']);
         exit;
     }
 
@@ -37,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$email, $nickname]);
     if ($stmt->fetchColumn() > 0) {
         http_response_code(409);
-        echo json_encode(['error' => 'Пользователь с таким никнеймом или email уже существует']);
+        echo safe_json(['error' => 'Пользователь с таким никнеймом или email уже существует']);
         exit;
     }
 
@@ -69,12 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'nickname' => $nickname,
             'email' => $email
         ];
-        echo json_encode(['success' => true, 'profile_image_url' => $profileImagePath]);
+        echo safe_json(['success' => true, 'profile_image_url' => $profileImagePath]);
     } catch (PDOException $e) {
         http_response_code(500);
-        echo json_encode(['error' => 'Ошибка регистрации']);
+        echo safe_json(['error' => 'Ошибка регистрации', 'details' => $e->getMessage()]);
     }
 } else {
     http_response_code(405);
-    echo json_encode(['error' => 'Метод не разрешён']);
+    echo safe_json(['error' => 'Метод не разрешён']);
 }

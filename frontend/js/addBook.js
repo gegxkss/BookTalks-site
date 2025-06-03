@@ -106,14 +106,37 @@ document.addEventListener('DOMContentLoaded', function() {
             else alert(data.error || 'Ошибка добавления цитаты');
         });
     };
-    // Сохранение оценки (звёзды)
-    document.querySelector('#rate-book-popup .save').onclick = function() {
-        const value = document.querySelector('#rate-book-popup .star.selected')?.getAttribute('data-rating');
-        if (!value) return alert('Выберите оценку');
+    // Исправление логики выбора звёзд и сохранения рейтинга
+    const stars = document.querySelectorAll('#rate-book-popup .star');
+    let selectedRating = 0;
+
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseenter', () => {
+            stars.forEach((s, i) => {
+                s.classList.toggle('active', i <= index);
+            });
+        });
+        star.addEventListener('mouseleave', () => {
+            stars.forEach((s, i) => {
+                s.classList.toggle('active', i < selectedRating);
+            });
+        });
+        star.addEventListener('click', () => {
+            selectedRating = index + 1;
+            stars.forEach((s, i) => {
+                s.classList.toggle('selected', i < selectedRating);
+            });
+        });
+    });
+
+    // Сохранение оценки и обновление рейтинга
+    const saveRatingButton = document.querySelector('#rate-book-popup .save');
+    saveRatingButton.onclick = function() {
+        if (!selectedRating) return alert('Выберите оценку');
         fetch('/BookTalks-site/backend/add_rating.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `book_id=${id}&amount=${encodeURIComponent(value)}`
+            body: `book_id=${id}&amount=${encodeURIComponent(selectedRating)}`
         })
         .then(res => res.json())
         .then(data => {
@@ -127,28 +150,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (data && typeof data.rating !== 'undefined' && data.rating !== null) {
                             ratingBlock.textContent = `★ ${data.rating}`;
                         } else {
-                            ratingBlock.textContent = '';
+                            ratingBlock.textContent = 'Рейтинг отсутствует';
                         }
                     });
             } else {
                 alert(data.error || 'Ошибка добавления оценки');
             }
+        })
+        .catch(err => {
+            console.error('Ошибка при добавлении оценки:', err);
+            alert('Произошла ошибка при сохранении оценки. Пожалуйста, попробуйте снова.');
         });
     };
-    // Выбор звёзд (фикс: выделять все до выбранной)
-    document.querySelectorAll('#rate-book-popup .star').forEach(star => {
-        star.onclick = function() {
-            const rating = parseInt(this.getAttribute('data-rating'));
-            document.querySelectorAll('#rate-book-popup .star').forEach(s => {
-                const sRating = parseInt(s.getAttribute('data-rating'));
-                if (sRating <= rating) {
-                    s.classList.add('selected');
-                } else {
-                    s.classList.remove('selected');
-                }
-            });
-        };
-    });
 
     // Загрузка цитат и рецензий с авторами (исправленные пути)
     fetch(`/BookTalks-site/backend/quotes_list.php?book_id=${id}`)

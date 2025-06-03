@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         block.className = 'resBook';
         block.innerHTML = `
           <div class="book">
+            <img src="/BookTalks-site/frontend/uploads/${q.coverimage_filename}" class="knizka" alt="Обложка книги">
             <div class="name">
               <p class="nameBook">${q.book_name}</p>
               <p class="author">${q.author_first_name} ${q.author_last_name}</p>

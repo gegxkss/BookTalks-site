@@ -56,17 +56,19 @@ body {
     white-space: nowrap;
     text-decoration: none;
     color: black;
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: 30px;
+    padding-right: 30px;
     font-size: 20px;
 }
-
+.logo{
+    margin-right: 5px;
+}
 .headertext:hover {
     color: #757474;
 }
 
 .svgprofile {
-    margin-left: 100px;
+    margin-left: 70px;
 }
 
 .resenz {

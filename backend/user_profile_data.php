@@ -85,11 +85,11 @@ if (!$user) {
     error_log('Данные пользователя: ' . json_encode($user));
 }
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode([
     'user' => $user,
     'books' => $books,
     'reviews' => $reviews,
     'quotes' => $quotes
-]);
+], JSON_UNESCAPED_UNICODE);
 exit;
