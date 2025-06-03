@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
       data.quotes.forEach(q => {
         const block = document.createElement('div');
         block.className = 'resBook';
+        let coverPath = q.coverimage_filename ? `/BookTalks-site/frontend/${q.coverimage_filename}` : '/BookTalks-site/uploads/no_cover.png';
         block.innerHTML = `
           <div class="book">
-            <img src="/BookTalks-site/frontend/uploads/${q.coverimage_filename}" class="knizka" alt="Обложка книги">
+            <img src="${coverPath}" class="knizka" alt="Обложка книги" onerror="this.onerror=null;this.src='/BookTalks-site/uploads/no_cover.png'">
             <div class="name">
               <p class="nameBook">${q.book_name}</p>
               <p class="author">${q.author_first_name} ${q.author_last_name}</p>

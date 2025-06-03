@@ -224,3 +224,11 @@ footer{
     font-family: mainfont;
     src: url(./JejuMyeongjo-Regular.ttf);
 }
+
+.book-cover {
+  width: 89px;
+  height: 146px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
