@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data && typeof data.rating !== 'undefined' && data.rating !== null) {
                         ratingBlock.textContent = `★ ${data.rating}`;
                     } else {
-                        ratingBlock.textContent = 'Рейтинг отсутствует';
+                        ratingBlock.textContent = '5 ★';
                     }
                 })
                 .catch(() => {

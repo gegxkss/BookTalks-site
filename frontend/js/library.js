@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bookDiv.innerHTML = `
                 <p class="name">${book.name}<br>${book.first_name ? book.first_name + ' ' : ''}${book.last_name || ''}</p>
                 <img src="${book.coverimage_filename ? '/BookTalks-site/frontend/' + book.coverimage_filename : 'styles/images/book_about.png'}" alt="Books" class="book_about">
-                <div class="rating">★ ${book.rating ? book.rating : ''}</div>
+                <div class="rating"> ${book.rating ? book.rating : ''}</div>
             `;
             bookDiv.onclick = () => {
                 window.location.href = `/BookTalks-site/frontend/addBook.html?id=${book.id}`;
